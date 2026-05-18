@@ -8,7 +8,13 @@ terraform {
   }
 
 # Remote Backend
-  backend "s3" {}      
+ backend "s3" {
+    bucket  = "remote-state-aws-88s-dev" # Replace with your unique bucket name
+    key     = "terraform-eks-vpc"
+    region  = "us-east-1"
+    encrypt = true
+    use_lockfile   = true
+  }
 }
 
 provider "aws" {
