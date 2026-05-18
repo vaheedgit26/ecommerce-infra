@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #################################################################
 # Usage:
-# source create-s3-bucket.sh <project_name> <env> <region> <action>
+# bash s3-bucket.sh <project_name> <env> <region> <action>
 #
 # Example:
-# source create-s3-bucket.sh ecommerce dev us-east-1 apply
-# source create-s3-bucket.sh ecommerce dev us-east-1 destroy
+# bash s3-bucket.sh ecommerce dev us-east-1 apply
+# bash s3-bucket.sh ecommerce dev us-east-1 destroy
 #################################################################
 
 set -e
@@ -28,7 +28,7 @@ abort() {
 
 # Validate inputs
 if [[ -z "$PROJECT_NAME" || -z "$ENV" || -z "$REGION" || -z "$ACTION" ]]; then
-    abort "Usage: source create-s3-bucket.sh <project_name> <env> <region> <apply|destroy>"
+    abort "Usage: source create-s3-bucket.sh <project_name> <env> <region> <plan|apply|destroy>"
 fi
 
 echo """
