@@ -4,7 +4,7 @@ locals {
   common_tags = {
     Project     = var.project
     Environment = var.env
-    Terraform   = "true"
+    Terraform   = "True"
   }
 
   eks_vpc_public_subnet_tags = {
