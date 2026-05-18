@@ -14,6 +14,7 @@ ACTION=$2
 
 if [[ -z "$COMPONENT" || -z "$ACTION" ]]; then
   echo "Usage: bash infra.sh <component> <plan|apply|destroy>"
+  echo "Example: bash infra.sh vpc plan"
   exit 1
 fi
 
@@ -21,18 +22,18 @@ fi
 BUCKET=$(terraform -chdir=../../00-s3-create output -raw bucket_id)
 ENV=$(terraform -chdir=../../00-s3-create output -raw env)
 REGION=$(terraform -chdir=../../00-s3-create output -raw region)
-PROJECT_NAME=$(terraform -chdir=../../00-s3-create output -raw project_name)
+PROJECT=$(terraform -chdir=../../00-s3-create output -raw project_name)
 
 PLAN_FILE="${COMPONENT}.tfplan"
 
 echo """
 📄 Details:
-     PROJECT_NAME : ${PROJECT_NAME}
-     ENV          : ${ENV}
-     REGION       : ${REGION}
-     BUCKET       : ${BUCKET}
-     COMPONENT    : ${COMPONENT}
-     ACTION       : ${ACTION}
+     PROJECT   : ${PROJECT}
+     ENV       : ${ENV}
+     REGION    : ${REGION}
+     BUCKET    : ${BUCKET}
+     COMPONENT : ${COMPONENT}
+     ACTION    : ${ACTION}
 """
 
 # 🚫 Block destroy in prod (safety)
@@ -52,7 +53,7 @@ echo "============================================="
 
 terraform init -upgrade \
   -backend-config="bucket=${BUCKET}" \
-  -backend-config="key=${PROJECT_NAME}/${ENV}/${COMPONENT}/terraform.tfstate" \
+  -backend-config="key=${PROJECT}/${ENV}/${COMPONENT}/terraform.tfstate" \
   -backend-config="region=${REGION}" \
   -backend-config="encrypt=true" \
   -backend-config="use_lockfile=true"
@@ -78,7 +79,7 @@ case "$ACTION" in
   plan)
     terraform plan \
       -out=${PLAN_FILE} \
-      -var="project_name=$PROJECT_NAME" \
+      -var="project_name=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
     ;;
@@ -89,7 +90,7 @@ case "$ACTION" in
     else
       echo "⚠️ No plan file found. Running direct apply..."
       terraform apply \
-        -var="project_name=$PROJECT_NAME" \
+        -var="project_name=$PROJECT" \
         -var="env=$ENV" \
         -var="region=$REGION"
     fi
@@ -104,7 +105,7 @@ case "$ACTION" in
     fi
 
     terraform destroy \
-      -var="project_name=$PROJECT_NAME" \
+      -var="project_name=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
     ;;
