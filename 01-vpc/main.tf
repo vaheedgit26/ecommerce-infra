@@ -16,5 +16,7 @@ module "vpc" {
   project      = var.project
   env          = var.env
   common_tags  = local.common_tags
-  vpc_eks_tags = local.vpc_eks_tags
+
+  eks_vpc_public_subnet_tags  = local.eks_vpc_public_subnet_tags
+  eks_vpc_private_subnet_tags = local.eks_vpc_private_subnet_tags
 }
