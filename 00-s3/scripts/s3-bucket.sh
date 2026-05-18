@@ -10,7 +10,7 @@
 
 set -e
 
-PROJECT_NAME=$1
+PROJECT=$1
 ENV=$2
 REGION=$3
 ACTION=$4
@@ -33,7 +33,7 @@ fi
 
 echo """
 📄 Details:
-     PROJECT_NAME : ${PROJECT_NAME}
+     PROJECT_NAME : ${PROJECT}
      ENV          : ${ENV}
      REGION       : ${REGION}
      ACTION       : ${ACTION}
@@ -64,7 +64,7 @@ case "$ACTION" in
 
   apply)
     terraform plan \
-      -var="project=$PROJECT_NAME" \
+      -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION" \
       -out=${PLAN_FILE}
@@ -82,7 +82,7 @@ case "$ACTION" in
     fi
 
     terraform destroy \
-      -var="project=$PROJECT_NAME" \
+      -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
     ;;
