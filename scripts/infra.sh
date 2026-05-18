@@ -19,10 +19,10 @@ if [[ -z "$COMPONENT" || -z "$ACTION" ]]; then
 fi
 
 # Fetch values from bootstrap module
-BUCKET=$(terraform -chdir=../../00-s3-create output -raw bucket_id)
-ENV=$(terraform -chdir=../../00-s3-create output -raw env)
-REGION=$(terraform -chdir=../../00-s3-create output -raw region)
-PROJECT=$(terraform -chdir=../../00-s3-create output -raw project_name)
+BUCKET=$(terraform -chdir=../00-s3 output -raw bucket_id)
+ENV=$(terraform -chdir=../00-s3 output -raw env)
+REGION=$(terraform -chdir=../00-s3 output -raw region)
+PROJECT=$(terraform -chdir=../00-s3 output -raw project_name)
 
 PLAN_FILE="${COMPONENT}.tfplan"
 
