@@ -1,6 +1,6 @@
 # VPC-MODULE Calling
 module "vpc" {
-  source = "git::https://github.com/vaheedgit26/Infra//modules/vpc" # Give the path to VPC MODULE accordingly
+  source = "git::https://github.com/vaheedgit26/Infra-1.0//modules/vpc" # Give the path to VPC MODULE accordingly
 
   # All the counts should be same 
   azs_count             = 2
