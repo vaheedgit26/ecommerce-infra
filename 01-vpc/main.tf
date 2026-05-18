@@ -17,6 +17,7 @@ module "vpc" {
   env          = var.env
   common_tags  = local.common_tags
 
+  # For ELB (internal/external) purpose
   eks_vpc_public_subnet_tags  = local.eks_vpc_public_subnet_tags
   eks_vpc_private_subnet_tags = local.eks_vpc_private_subnet_tags
 }
