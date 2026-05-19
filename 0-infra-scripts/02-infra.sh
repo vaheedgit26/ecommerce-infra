@@ -100,10 +100,8 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
   exit 1
 fi
 
-PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
 
-# ✅ Set trap immediately after defining PLAN_FILE
-trap '[[ -f "${PLAN_FILE:-}" ]] && rm -f "${PLAN_FILE}"' EXIT
+PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
 
 cd "${DEST_DIR}"
 
@@ -138,6 +136,9 @@ echo "============================================="
 echo "Step 3: ${ACTION}"
 echo "============================================="
 
+if [[ "$ACTION" == "apply" || "$ACTION" == "destroy" ]]; then
+  trap '[[ -f "${PLAN_FILE}" ]] && rm -f "${PLAN_FILE}"' EXIT
+fi
 
 case "$ACTION" in
 
