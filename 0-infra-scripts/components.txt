@@ -1,3 +1,4 @@
+# No duplicates allowed and no spaces either side of "="
 vpc=00-vpc
 eks=01-eks
 alb=02-alb
