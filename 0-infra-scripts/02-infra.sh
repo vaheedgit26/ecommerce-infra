@@ -22,7 +22,7 @@ fi
 BUCKET=$(terraform -chdir=../00-s3 output -raw bucket_id)
 ENV=$(terraform -chdir=../00-s3 output -raw env)
 REGION=$(terraform -chdir=../00-s3 output -raw region)
-PROJECT=$(terraform -chdir=../00-s3 output -raw project_name)
+PROJECT=$(terraform -chdir=../00-s3 output -raw project)
 
 PLAN_FILE="${COMPONENT}.tfplan"
 
@@ -42,7 +42,7 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
   exit 1
 fi
 
-cd ..
+cd ../${COMPONENT}
 
 ##############################################
 # Step 1: Terraform Init (Dynamic Backend)
@@ -79,7 +79,7 @@ case "$ACTION" in
   plan)
     terraform plan \
       -out=${PLAN_FILE} \
-      -var="project_name=$PROJECT" \
+      -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
     ;;
@@ -90,7 +90,7 @@ case "$ACTION" in
     else
       echo "⚠️ No plan file found. Running direct apply..."
       terraform apply \
-        -var="project_name=$PROJECT" \
+        -var="project=$PROJECT" \
         -var="env=$ENV" \
         -var="region=$REGION"
     fi
@@ -105,7 +105,7 @@ case "$ACTION" in
     fi
 
     terraform destroy \
-      -var="project_name=$PROJECT" \
+      -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
     ;;
