@@ -8,12 +8,12 @@ set -euo pipefail
 #   bash infra.sh eks dev apply
 #   bash infra.sh alb dev destroy
 ##############################################
-LOG_FILE="infra-${COMPONENT}-${ENV}.log"
-exec > >(tee -a "$LOG_FILE") 2>&1
-
 COMPONENT=$1
 ENV=$2
 ACTION=$3
+
+LOG_FILE="infra-${COMPONENT}-${ENV}.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
 
 if [[ -z "$COMPONENT" || -z "$ENV" || -z "$ACTION" ]]; then
   echo "Usage: bash infra.sh <component: vpc|eks|..> <env: dev|qa|prod> <action: plan|apply|destroy>"
