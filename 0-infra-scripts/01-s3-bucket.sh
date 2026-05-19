@@ -40,7 +40,7 @@ echo """
 """
 
 # Move to terraform directory
-cd ..
+cd ../00-s3
 
 echo "============================================="
 echo "Step 1: Terraform Init"
@@ -62,13 +62,15 @@ echo "============================================="
 
 case "$ACTION" in
 
-  apply)
-    terraform plan \
+  plan)
+     terraform plan \
       -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION" \
       -out=${PLAN_FILE}
+    ;;
 
+  apply)
     terraform apply ${PLAN_FILE}
     ;;
 
