@@ -39,25 +39,36 @@ case "$ACTION" in
     ;;
 esac
 
+if [[ ! -f components.txt ]]; then
+  echo "❌ components.txt not found"
+  exit 1
+fi
+
 # Component validation
-DEST_DIR=$(awk -F= -v c="$COMPONENT" '$1==c {print $2}' components.txt)
-COUNT=$(awk -F= -v c="$COMPONENT" '$1==c {print}' components.txt | wc -l)
+MATCHES=$(grep -E "^${COMPONENT}[[:space:]]*=" components.txt || true)
+
+COUNT=$(grep -c -E "^${COMPONENT}[[:space:]]*=" components.txt || true)
+
+if [[ "$COUNT" -eq 0 ]]; then
+  echo "❌ Invalid component: $COMPONENT"
+  echo "Refer to file: components.txt"
+  exit 1
+fi
 
 if [[ "$COUNT" -gt 1 ]]; then
   echo "❌ Duplicate entries found for $COMPONENT"
   exit 1
 fi
 
-if [[ -z "${DEST_DIR:-}" ]]; then
-  echo "❌ Invalid component: $COMPONENT"
-  exit 1
-fi
+DEST_DIR=$(echo "$MATCHES" | cut -d= -f2 | xargs)
+
 
 # Log file config
 LOG_FILE="infra-${COMPONENT}-${ENV}-$(date +%F-%H%M).log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
 S3_DIR="../00-s3"
+
 
 # Ensure S3-Bucket created first
 if ! terraform -chdir="${S3_DIR}" output -raw bucket_id >/dev/null 2>&1; then
@@ -89,8 +100,10 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
   exit 1
 fi
 
-
 PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
+
+# ✅ Set trap immediately after defining PLAN_FILE
+trap '[[ -f "${PLAN_FILE:-}" ]] && rm -f "${PLAN_FILE}"' EXIT
 
 cd "${DEST_DIR}"
 
@@ -125,17 +138,14 @@ echo "============================================="
 echo "Step 3: ${ACTION}"
 echo "============================================="
 
-if [[ "$ACTION" == "apply" || "$ACTION" == "destroy" ]]; then
-  trap '[[ -f "${PLAN_FILE}" ]] && rm -f "${PLAN_FILE}"' EXIT
-fi
 
 case "$ACTION" in
 
   plan)
     terraform plan \
-	  -input=false \
+      -input=false \
       -out="${PLAN_FILE}" \
-	  -lock-timeout=300s \
+      -lock-timeout=300s \
       -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
@@ -143,10 +153,10 @@ case "$ACTION" in
 
   apply)
     if [[ ! -f "${PLAN_FILE}" ]]; then
-	  echo "❌ Plan file missing. Run plan first."
+    echo "❌ Plan file missing. Run plan first."
       exit 1
-	fi
-	terraform apply -input=false "${PLAN_FILE}"
+  fi
+  terraform apply -input=false "${PLAN_FILE}"
     ;;
 
   destroy)
@@ -158,8 +168,8 @@ case "$ACTION" in
     fi
 
     terraform destroy \
-	  -input=false \
-	  -auto-approve \
+      -input=false \
+      -auto-approve \
       -var="project=$PROJECT" \
       -var="env=$ENV" \
       -var="region=$REGION"
@@ -172,4 +182,3 @@ case "$ACTION" in
     ;;
 
 esac
-
