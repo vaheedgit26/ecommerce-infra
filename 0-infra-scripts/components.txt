@@ -1,6 +1,3 @@
-vpc
-eks
-alb
-rds
-redis
-s3
+vpc=00-vpc
+eks=01-eks
+alb=02-alb
