@@ -1,0 +1,6 @@
+vpc
+eks
+alb
+rds
+redis
+s3
