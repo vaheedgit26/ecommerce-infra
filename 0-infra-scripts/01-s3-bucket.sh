@@ -27,7 +27,7 @@ abort() {
 }
 
 # Validate inputs
-if [[ -z "$PROJECT_NAME" || -z "$ENV" || -z "$REGION" || -z "$ACTION" ]]; then
+if [[ -z "$PROJECT" || -z "$ENV" || -z "$REGION" || -z "$ACTION" ]]; then
     abort "Usage: source create-s3-bucket.sh <project_name> <env> <region> <plan|apply|destroy>"
 fi
 
@@ -71,7 +71,15 @@ case "$ACTION" in
     ;;
 
   apply)
-    terraform apply ${PLAN_FILE}
+    if [[ -f "${PLAN_FILE}" ]]; then
+      terraform apply ${PLAN_FILE}
+    else
+      echo "⚠️ No plan file found. Running direct apply..."
+      terraform apply \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION"
+    fi
     ;;
 
   destroy)
