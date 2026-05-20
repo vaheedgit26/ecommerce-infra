@@ -38,5 +38,5 @@ validate() {
   fi
   
   DEST_DIR=$(echo "$MATCHES" | cut -d= -f2 | xargs)
-  echo "$DEST_DIR}"
+  echo "${DEST_DIR}"
 }
