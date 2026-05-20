@@ -10,7 +10,7 @@ validate() {
     dev|qa|prod) ;;
     *)
       echo "❌ Invalid env: $ENV" >&2
-      exit 1
+      return 1
       ;;
   esac
 
@@ -19,7 +19,7 @@ validate() {
     plan|apply|destroy) ;;
     *)
       echo "❌ Invalid action: $ACTION" >&2
-      exit 1
+      return 1
       ;;
   esac
   
@@ -29,12 +29,12 @@ validate() {
 
   if [[ "$COUNT" -eq 0 ]]; then
     echo "❌ Invalid component: $COMPONENT" >&2
-    exit 1
+    return 1
   fi
 
   if [[ "$COUNT" -gt 1 ]]; then
     echo "❌ Duplicate entries for $COMPONENT" >&2
-    exit 1
+    return 1
   fi
   
   DEST_DIR=$(echo "$MATCHES" | cut -d= -f2 | xargs)
