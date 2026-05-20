@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 validate() {
+  DEST_DIR_RESULT=""
+  
   local COMPONENT=$1
   local ENV=$2
   local ACTION=$3
