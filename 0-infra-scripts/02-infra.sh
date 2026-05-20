@@ -2,22 +2,17 @@
 # set -e
 set -euo pipefail
 #####################################################################
-# Usage: bash infra.sh <component> <env> <action> <components_file>
+# Usage: bash infra.sh <component> <env> <action> 
 # Example:
-#   bash infra.sh vpc dev plan components.txt
-#   bash infra.sh eks dev apply components.txt
-#   bash infra.sh alb dev destroy components.txt
+#   bash infra.sh vpc dev plan 
+#   bash infra.sh eks dev apply 
+#   bash infra.sh alb dev destroy 
 #####################################################################
 # Parameters validation
-if [[ $# -ne 3 ]]; then
+if [[ $# -ne 4 ]]; then
   echo "Usage: bash infra.sh <component: vpc|eks|..> <env: dev|qa|prod> <action: plan|apply|destroy>"
   echo "Example: bash infra.sh vpc dev plan"
   exit 1
-fi
-
-if [[ ! -f components.txt ]]; then
-    echo "❌ File not found: 'components.txt'"
-    exit 1
 fi
 
 # Load functions
@@ -27,7 +22,12 @@ source "$(dirname "$0")/lib/validate.sh"
 COMPONENT=$1
 ENV=$2
 ACTION=$3
-COMPONENTS_FILE=$4
+COMPONENTS_FILE="components.txt"
+
+if [[ ! -f "${COMPONENTS_FILE}" ]]; then
+  echo "❌ File not found: 'components.txt'"
+  exit 1
+fi
 
 # Log file config
 LOG_FILE="infra-${COMPONENT}-${ENV}-$(date +%F-%H%M).log"
