@@ -4,7 +4,7 @@ module "bastion_sg" {
 
   project        = var.project
   env            = var.env
-  vpc_id         = module.vpc.vpc_id
+  vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
   sg_name        = "bastion_sg"
   sg_description = "Bastion Instance Security Group"
   common_tags    = local.common_tags
@@ -28,7 +28,7 @@ module "bastion_ec2" {
   instance_type               = "t3.micro"                        # var.instance_type
   public_key_name             = var.public_key_name               # "us-east-1"
   sg_ids                      = [module.bastion_sg.sg_id]         # [local.sg_id]
-  subnet_id                   = module.vpc.public_subnet_ids[0]   # local.public_subnet_ids[0] # "subnet-088e8443a70102e2a" #1a
+  subnet_id                   = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]   # local.public_subnet_ids[0] 
   associate_public_ip_address = true
   what_type_instance          = "bastion"
 
