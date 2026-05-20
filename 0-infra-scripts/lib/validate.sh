@@ -6,6 +6,7 @@ validate() {
   local COMPONENT=$1
   local ENV=$2
   local ACTION=$3
+  local COMPONENTS_FILE=$4
 
   # Validate ENV
   case "$ENV" in
@@ -26,7 +27,7 @@ validate() {
   esac
   
   # Validate component
-  MATCHES=$(grep -E "^${COMPONENT}[[:space:]]*=" components.txt || true)
+  MATCHES=$(grep -E "^${COMPONENT}[[:space:]]*=" "$COMPONENTS_FILE" || true)
   COUNT=$(echo "$MATCHES" | grep -c . || true)
 
   if [[ "$COUNT" -eq 0 ]]; then
