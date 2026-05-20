@@ -9,7 +9,7 @@ validate() {
   case "$ENV" in
     dev|qa|prod) ;;
     *)
-      echo "❌ Invalid env: $ENV"
+      echo "❌ Invalid env: $ENV" >&2
       exit 1
       ;;
   esac
@@ -18,7 +18,7 @@ validate() {
   case "$ACTION" in
     plan|apply|destroy) ;;
     *)
-      echo "❌ Invalid action: $ACTION"
+      echo "❌ Invalid action: $ACTION" >&2
       exit 1
       ;;
   esac
@@ -28,12 +28,12 @@ validate() {
   COUNT=$(echo "$MATCHES" | grep -c . || true)
 
   if [[ "$COUNT" -eq 0 ]]; then
-    echo "❌ Invalid component: $COMPONENT"
+    echo "❌ Invalid component: $COMPONENT" >&2
     exit 1
   fi
 
   if [[ "$COUNT" -gt 1 ]]; then
-    echo "❌ Duplicate entries for $COMPONENT"
+    echo "❌ Duplicate entries for $COMPONENT" > &2
     exit 1
   fi
   
