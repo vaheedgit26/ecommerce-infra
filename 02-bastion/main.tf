@@ -1,6 +1,6 @@
 # Security Group for Bastion Host
 module "bastion_sg" {
-  source = "../../../modules/sg"
+  source = "git::https://github.com/vaheedgithubac/Infra-1.0.git//modules/sg"
 
   project        = var.project
   env            = var.env
