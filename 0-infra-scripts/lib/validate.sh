@@ -33,7 +33,7 @@ validate() {
   fi
 
   if [[ "$COUNT" -gt 1 ]]; then
-    echo "❌ Duplicate entries for $COMPONENT" > &2
+    echo "❌ Duplicate entries for $COMPONENT" >&2
     exit 1
   fi
   
