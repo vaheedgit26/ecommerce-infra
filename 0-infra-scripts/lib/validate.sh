@@ -36,7 +36,6 @@ validate() {
     echo "❌ Duplicate entries for $COMPONENT" >&2
     return 1
   fi
-  
-  DEST_DIR=$(echo "$MATCHES" | cut -d= -f2 | xargs)
-  echo "${DEST_DIR}"
+
+  DEST_DIR_RESULT=$(echo "$MATCHES" | cut -d= -f2 | xargs)
 }
