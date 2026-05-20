@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # set -e
 set -euo pipefail
-##################################################
-# Usage: bash infra.sh <component> <env> <action>
+#####################################################################
+# Usage: bash infra.sh <component> <env> <action> <components_file>
 # Example:
 #   bash infra.sh vpc dev plan
 #   bash infra.sh eks dev apply
 #   bash infra.sh alb dev destroy
-##################################################
+#####################################################################
 # Parameters validation
 if [[ $# -ne 3 ]]; then
   echo "Usage: bash infra.sh <component: vpc|eks|..> <env: dev|qa|prod> <action: plan|apply|destroy>"
@@ -27,6 +27,7 @@ source "$(dirname "$0")/lib/validate.sh"
 COMPONENT=$1
 ENV=$2
 ACTION=$3
+COMPONENTS_FILE=$4
 
 # Log file config
 LOG_FILE="infra-${COMPONENT}-${ENV}-$(date +%F-%H%M).log"
@@ -66,7 +67,7 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
 fi
 
 # validate() Function call
-if ! validate "$COMPONENT" "$ENV" "$ACTION"; then
+if ! validate "$COMPONENT" "$ENV" "$ACTION" "$COMPONENTS_FILE"; then
   echo "❌ Validation failed"
   exit 1
 fi
