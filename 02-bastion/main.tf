@@ -27,7 +27,7 @@ module "bastion_ec2" {
   ami_id                      = var.ami_id                        # "ami-0ea87431b78a82070"
   instance_type               = "t3.micro"                        # var.instance_type
   public_key_name             = var.public_key_name               # "us-east-1"
-  sg_ids                      = [module.bastion_sg.sg_id]           # [local.sg_id]
+  sg_ids                      = [module.bastion_sg.sg_id]         # [local.sg_id]
   subnet_id                   = module.vpc.public_subnet_ids[0]   # local.public_subnet_ids[0] # "subnet-088e8443a70102e2a" #1a
   associate_public_ip_address = true
   what_type_instance          = "bastion"
