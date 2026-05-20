@@ -73,12 +73,13 @@ if ! validate "$COMPONENT" "$ENV" "$ACTION" "$COMPONENTS_FILE"; then
 fi
 
 # DEST_DIR=$(validate "$COMPONENT" "$ENV" "$ACTION")
-DEST_DIR="$DEST_DIR_RESULT"
+DEST_DIR="${DEST_DIR_RESULT:-}"
 
-echo "${DEST_DIR}"
+echo "Destination Directory: ${DEST_DIR}"
 
 if [[ -z "${DEST_DIR:-}" ]]; then
-  echo "No Destination Directory found to run terraform"
+  echo "❌ No Destination Directory found to run terraform"
+  echo "❌ Internal error: DEST_DIR not set after validation"
   exit 1
 fi
 
