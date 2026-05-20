@@ -66,12 +66,13 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
 fi
 
 # validate() Function call
-if ! DEST_DIR=$(validate "$COMPONENT" "$ENV" "$ACTION"); then
+if ! validate "$COMPONENT" "$ENV" "$ACTION"; then
   echo "❌ Validation failed"
   exit 1
 fi
 
 # DEST_DIR=$(validate "$COMPONENT" "$ENV" "$ACTION")
+DEST_DIR="$DEST_DIR_RESULT"
 
 echo "${DEST_DIR}"
 
