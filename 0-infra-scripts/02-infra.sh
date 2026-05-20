@@ -15,53 +15,18 @@ if [[ $# -ne 3 ]]; then
   exit 1
 fi
 
+if [[ ! -f components.txt ]]; then
+    echo "❌ File not found: 'components.txt'"
+    exit 1
+fi
+
+# Load functions
+source "$(dirname "$0")/lib/validate.sh"
+
 # Assigning input parameters
 COMPONENT=$1
 ENV=$2
 ACTION=$3
-
-# ENV validation
-case "$ENV" in
-  dev|qa|prod) ;;
-  *)
-    echo "❌ Invalid env: $ENV"
-    echo "Valid: (dev|qa|prod)"
-    exit 1
-    ;;
-esac
-
-# ACTION validation
-case "$ACTION" in
-  plan|apply|destroy) ;;
-  *)
-    echo "❌ Invalid action: $ACTION"
-    exit 1
-    ;;
-esac
-
-if [[ ! -f components.txt ]]; then
-  echo "❌ components.txt not found"
-  exit 1
-fi
-
-# Component validation
-MATCHES=$(grep -E "^${COMPONENT}[[:space:]]*=" components.txt || true)
-
-COUNT=$(grep -c -E "^${COMPONENT}[[:space:]]*=" components.txt || true)
-
-if [[ "$COUNT" -eq 0 ]]; then
-  echo "❌ Invalid component: $COMPONENT"
-  echo "Refer to file: components.txt"
-  exit 1
-fi
-
-if [[ "$COUNT" -gt 1 ]]; then
-  echo "❌ Duplicate entries found for $COMPONENT"
-  exit 1
-fi
-
-DEST_DIR=$(echo "$MATCHES" | cut -d= -f2 | xargs)
-
 
 # Log file config
 LOG_FILE="infra-${COMPONENT}-${ENV}-$(date +%F-%H%M).log"
@@ -69,22 +34,22 @@ exec > >(tee -a "$LOG_FILE") 2>&1
 
 S3_DIR="../00-s3"
 
+tf_output() {
+  terraform -chdir="${S3_DIR}" output -raw "$1"
+}
 
 # Ensure S3-Bucket created first
-if ! terraform -chdir="${S3_DIR}" output -raw bucket_id >/dev/null 2>&1; then
+if ! tf_output bucket_id >/dev/null 2>&1; then
   echo "❌ Bootstrap (00-s3) not applied"
   exit 1
 fi
 
-
-# Fetch values from bootstrap S3 module
-BUCKET=$(terraform -chdir="${S3_DIR}" output -raw bucket_id)
-# ENV=$2 #$(terraform -chdir=../00-s3 output -raw env)
-REGION=$(terraform -chdir="${S3_DIR}" output -raw region)
-PROJECT=$(terraform -chdir="${S3_DIR}" output -raw project)
+BUCKET=$(tf_output bucket_id)
+REGION=$(tf_output region)
+PROJECT=$(tf_output project)
 
 # Print values
-echo """
+cat <<EOF
 📄 Details:
      PROJECT   : ${PROJECT}
      ENV       : ${ENV}
@@ -92,7 +57,7 @@ echo """
      BUCKET    : ${BUCKET}
      COMPONENT : ${COMPONENT}
      ACTION    : ${ACTION}
-"""
+EOF
 
 # 🚫 Block destroy in prod (safety)
 if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
@@ -100,8 +65,20 @@ if [[ "$ENV" == "prod" && "$ACTION" == "destroy" ]]; then
   exit 1
 fi
 
+# validate() Function call
+if ! DEST_DIR=$(validate "$COMPONENT" "$ENV" "$ACTION"); then
+  echo "❌ Validation failed"
+  exit 1
+fi
 
-PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
+# DEST_DIR=$(validate "$COMPONENT" "$ENV" "$ACTION")
+
+echo "${DEST_DIR}"
+
+if [[ -z "${DEST_DIR:-}" ]]; then
+  echo "No Destination Directory found to run terraform"
+  exit 1
+fi
 
 cd "${DEST_DIR}"
 
@@ -123,22 +100,24 @@ terraform init -upgrade \
 ##############################################
 # Step 2: Validate
 ##############################################
-echo "============================================="
+echo "========================================"
 echo "Step 2: Validate"
-echo "============================================="
+echo "========================================"
 
 terraform validate
 
 ##############################################
 # Step 3: Action Handler
 ##############################################
-echo "============================================="
+echo "========================================"
 echo "Step 3: ${ACTION}"
-echo "============================================="
+echo "========================================"
+PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
 
 if [[ "$ACTION" == "apply" || "$ACTION" == "destroy" ]]; then
   trap '[[ -f "${PLAN_FILE}" ]] && rm -f "${PLAN_FILE}"' EXIT
 fi
+
 
 case "$ACTION" in
 
@@ -154,10 +133,10 @@ case "$ACTION" in
 
   apply)
     if [[ ! -f "${PLAN_FILE}" ]]; then
-    echo "❌ Plan file missing. Run plan first."
+      echo "❌ Plan file missing. Run plan first."
       exit 1
-  fi
-  terraform apply -input=false "${PLAN_FILE}"
+    fi
+    terraform apply -input=false "${PLAN_FILE}"
     ;;
 
   destroy)
