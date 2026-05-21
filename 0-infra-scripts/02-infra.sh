@@ -84,7 +84,7 @@ if [[ -z "${DEST_DIR:-}" ]]; then
   exit 1
 fi
 
-cd "${DEST_DIR}"
+cd "../${DEST_DIR}"
 
 ##############################################
 # Step 1: Terraform Init (Dynamic Backend)
