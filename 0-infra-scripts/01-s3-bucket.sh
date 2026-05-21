@@ -33,10 +33,10 @@ fi
 
 echo """
 📄 Details:
-     PROJECT_NAME : ${PROJECT}
-     ENV          : ${ENV}
-     REGION       : ${REGION}
-     ACTION       : ${ACTION}
+     PROJECT : ${PROJECT}
+     ENV     : ${ENV}
+     REGION  : ${REGION}
+     ACTION  : ${ACTION}
 """
 
 # Move to terraform directory
