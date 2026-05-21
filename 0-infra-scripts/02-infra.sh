@@ -25,7 +25,7 @@ ACTION=$3
 COMPONENTS_FILE="components.txt"
 
 if [[ ! -f "${COMPONENTS_FILE}" ]]; then
-  echo "❌ File not found: 'components.txt'"
+  echo "❌ File not found: ${COMPONENTS_FILE}"
   exit 1
 fi
 
