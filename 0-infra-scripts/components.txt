@@ -1,4 +1,4 @@
 # No duplicates allowed and no spaces either side of "="
-vpc=00-vpc
-eks=01-eks
-alb=02-alb
+vpc=01-vpc
+eks=02-eks
+alb=03-alb
