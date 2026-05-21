@@ -9,7 +9,7 @@ set -euo pipefail
 #   bash infra.sh alb dev destroy 
 #####################################################################
 # Parameters validation
-if [[ $# -ne 4 ]]; then
+if [[ $# -ne 3 ]]; then
   echo "Usage: bash infra.sh <component: vpc|eks|..> <env: dev|qa|prod> <action: plan|apply|destroy>"
   echo "Example: bash infra.sh vpc dev plan"
   exit 1
