@@ -94,7 +94,8 @@ case "$ACTION" in
     terraform destroy \
       -var="project=$PROJECT" \
       -var="env=$ENV" \
-      -var="region=$REGION"
+      -var="region=$REGION" \
+      -auto-approve
     ;;
 
   *)
