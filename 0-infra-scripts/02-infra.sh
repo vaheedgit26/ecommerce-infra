@@ -114,7 +114,7 @@ terraform validate
 # Step 3: Action Handler
 ##############################################
 echo "========================================"
-echo "Step 3: ${ACTION}"
+echo "Step 3: Terraform: ${ACTION}"
 echo "========================================"
 PLAN_FILE="${PROJECT}-${ENV}-${COMPONENT}.tfplan"
 
@@ -122,17 +122,27 @@ if [[ "$ACTION" == "apply" || "$ACTION" == "destroy" ]]; then
   trap '[[ -f "${PLAN_FILE}" ]] && rm -f "${PLAN_FILE}"' EXIT
 fi
 
-
 case "$ACTION" in
 
   plan)
-    terraform plan \
-      -input=false \
-      -out="${PLAN_FILE}" \
-      -lock-timeout=300s \
-      -var="project=$PROJECT" \
-      -var="env=$ENV" \
-      -var="region=$REGION"
+    if [[ "${COMPONENT}" == "vpc" ]]; then
+      terraform plan \
+        -input=false \
+        -out="${PLAN_FILE}" \
+        -lock-timeout=300s \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION" 
+    else 
+      terraform plan \
+        -input=false \
+        -out="${PLAN_FILE}" \
+        -lock-timeout=300s \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION" \
+        -var="s3_bucket_name=$BUCKET"
+    fi
     ;;
 
   apply)
@@ -151,12 +161,22 @@ case "$ACTION" in
       exit 1
     fi
 
-    terraform destroy \
-      -input=false \
-      -auto-approve \
-      -var="project=$PROJECT" \
-      -var="env=$ENV" \
-      -var="region=$REGION"
+    if [[ "${COMPONENT}" == "vpc" ]]; then
+      terraform destroy \
+        -input=false \
+        -auto-approve \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION"
+    else
+      terraform destroy \
+        -input=false \
+        -auto-approve \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION" \
+        -var="s3_bucket_name=$BUCKET"
+    fi
     ;;
 
   *)
