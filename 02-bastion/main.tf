@@ -33,8 +33,7 @@ module "bastion_ec2" {
   what_type_instance          = "bastion"
 
   # user_data = file("${path.module}/mysql_client_8.sh")
-  # is_nat_instance             = var.is_nat_instance  # creates NAT instance if true
-
+ 
   project      = var.project
   env          = var.env
   common_tags  = local.common_tags
