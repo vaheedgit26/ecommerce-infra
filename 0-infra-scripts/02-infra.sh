@@ -58,6 +58,7 @@ cat <<EOF
      BUCKET    : ${BUCKET}
      COMPONENT : ${COMPONENT}
      ACTION    : ${ACTION}
+     COMPONENTS_FILE : ${COMPONENTS_FILE}
 EOF
 
 # 🚫 Block destroy in prod (safety)
