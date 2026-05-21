@@ -1,6 +1,6 @@
 # NAT-INSTANCE Module Calling
 module "nat_instance" {
-  source = "git::https://github.com/vaheedgit26/Infra-1.0//modules/nat-instance"
+  source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/nat-instance"
   # depends_on = [module.vpc]
 
   vpc_id                                  = data.terraform_remote_state.vpc.outputs.vpc_id
