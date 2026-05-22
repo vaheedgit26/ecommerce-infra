@@ -13,6 +13,6 @@ module "rds" {
   db_name                 = ""
   username                = var.db_username
   password                = var.db_password
-  db_subnet_group_name    = aws_db_subnet_group.database_subnet_group.name  # var.db_subnet_group_name
+  db_subnet_group_name    = "${var.project}-${var.env}-rds-subnet-group"  # var.db_subnet_group_name
   vpc_security_group_ids  = var.vpc_security_group_ids
 }
