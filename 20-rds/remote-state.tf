@@ -12,7 +12,7 @@ data "terraform_remote_state" "vpc" {
 }
 
 # --------------------------------------------------------------------
-# Reference the Remote State from VPC Project
+# Reference the Remote State from EKS Project
 # --------------------------------------------------------------------
 data "terraform_remote_state" "eks" {
   backend = "s3"
