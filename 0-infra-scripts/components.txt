@@ -1,4 +1,5 @@
 # Note: No duplicates allowed and no spaces allowed either side of "=" sign
 vpc=01-vpc
-eks=02-bastion
+bastion=02-bastion
+nat-instance=03-nat-instance
 alb=03-alb
