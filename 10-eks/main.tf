@@ -15,7 +15,7 @@ module "eks" {
   cluster_endpoint_private_access  = true                             # Control plane to Node and vice versa communication
   # cluster_addl_security_group_ids  = [module.vpc.bastion_host_sg_id]  # This is additional cluster SG and the default cluster SG is intact
 
-  node_subnet_ids     = module.vpc.private_subnet_ids
+  node_subnet_ids     = data.terraform_remote_state.vpc.outputs.private_subnet_ids
   node_instance_types = ["t3.small"]
   node_capacity_type  = "SPOT"
 
