@@ -11,25 +11,25 @@ module "rds_postgre_sg" {
   common_tags    = local.common_tags
 }
 
-# bastion (public_subnet) ---> postgres (database_subnet)
+# bastion (public_subnet) ---> postgre (database_subnet)
 resource "aws_security_group_rule" "postgre_bastion" {
   type                     = "ingress"
   from_port                = 5432
   to_port                  = 5432
   protocol                 = "tcp"
-  source_security_group_id = module.bastion_sg.sg_id     # you need to update eks cluster security group
+  source_security_group_id = data.terraform_remote_state.bastion.outputs.bastion_sg_id
   security_group_id        = module.rds_postgre_sg.sg_id
 
   # depends_on = [module.bastion_sg]
 }
 
-# backend (private instances in private_subnet)  --->  mysql (database_subnet)
+# EKS cluster  --->  postgre (database_subnet)
 resource "aws_security_group_rule" "mysql_backend" {
   type                     = "ingress"
   from_port                = 5432
   to_port                  = 5432
   protocol                 = "tcp"
-  source_security_group_id = module.backend_sg.sg_id   # you need to update eks cluster security group
+  source_security_group_id = data.terraform_remote_state.eks.outputs.cluster_security_group_id
   security_group_id        = module.rds_postgre_sg.sg_id
 
   # depends_on = [module.backend_sg]
