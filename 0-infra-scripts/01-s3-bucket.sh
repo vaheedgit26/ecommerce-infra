@@ -4,8 +4,8 @@
 #   bash s3-bucket.sh <project_name> <env> <region> <action>
 #
 # Example:
-#   bash s3-bucket.sh ecommerce dev us-east-1 apply
-#   bash s3-bucket.sh ecommerce dev us-east-1 destroy
+#   bash 01-s3-bucket.sh ecommerce dev us-east-1 apply
+#   bash 01-s3-bucket.sh ecommerce dev us-east-1 destroy
 #################################################################
 
 set -e
