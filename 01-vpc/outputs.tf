@@ -19,3 +19,7 @@ output "database_route_table_id" { value = module.vpc.database_route_table_id }
 
 # This returns entire 'internet_gateway' object, if you want only 'id' then use "aws_internet_gateway.internet_gateway.id"
 output "internet_gateway"        { value = module.vpc.internet_gateway }
+
+output "eks_cluster_name" { 
+  value = module.vpc.eks_cluster_name != null ? module.vpc.eks_cluster_name : null 
+}
