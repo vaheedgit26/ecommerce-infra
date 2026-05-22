@@ -10,7 +10,7 @@ module "rds" {
   allocated_storage       = 10  # 20
   storage_type            = "gp2"
   storage_encrypted       = false   # true
-  db_name                 = ""
+  db_name                 = "ecommercedb"
   username                = var.db_username
   password                = var.db_password
   db_subnet_group_name    = "${var.project}-${var.env}-postgre-rds-subnet-group"  # var.db_subnet_group_name
