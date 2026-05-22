@@ -1,4 +1,4 @@
-# No duplicates allowed and no spaces either side of "="
+# Note: No duplicates allowed and no spaces allowed either side of "=" sign
 vpc=01-vpc
 eks=02-bastion
 alb=03-alb
