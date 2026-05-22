@@ -3,8 +3,8 @@ module "rds_postgre_sg" {
   source = "git::https://github.com/vaheedgit26/Infra-1.0.git//modules/sg"
 
   vpc_id         = data.terraform_remote_state.vpc.outputs.vpc_id
-  sg_name        = "rds_sg"
-  sg_description = "RDS Instance Security Group"
+  sg_name        = "${var.project}-${var.env}-postgre-rds-sg"
+  sg_description = "Postgre RDS Instance Security Group"
 
   project        = var.project
   env            = var.env
