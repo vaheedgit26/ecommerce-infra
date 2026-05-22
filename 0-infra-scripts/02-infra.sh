@@ -154,7 +154,7 @@ case "$ACTION" in
     ;;
 
   destroy)
-    read -r -p "⚠️ Are you sure you want to destroy ${COMPONENT}? Type 'yes' to continue: " CONFIRM
+    read -r -p "⚠️  Are you sure you want to destroy ${COMPONENT}? Type 'yes' to continue: " CONFIRM
 
     if [[ "$CONFIRM" != "yes" ]]; then
       echo "❌ Destroy cancelled"
