@@ -4,9 +4,9 @@ set -euo pipefail
 #####################################################################
 # Usage: bash infra.sh <component> <env> <action> 
 # Example:
-#   bash infra.sh vpc dev plan 
-#   bash infra.sh eks dev apply 
-#   bash infra.sh alb dev destroy 
+#   bash 02-infra.sh vpc dev plan 
+#   bash 02-infra.sh eks dev apply 
+#   bash 02-infra.sh alb dev destroy 
 #####################################################################
 # Parameters validation
 if [[ $# -ne 3 ]]; then
