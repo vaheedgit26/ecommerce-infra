@@ -13,6 +13,6 @@ module "rds" {
   db_name                 = "ecommercedb"
   username                = var.db_username
   password                = var.db_password
-  db_subnet_group_name    = "${var.project}-${var.env}-postgre-rds-subnet-group"  # var.db_subnet_group_name
+  db_subnet_group_name    = "${var.project}-${var.env}-postgre-rds-db-subnet-group"  # var.db_subnet_group_name
   vpc_security_group_ids  = [data.terraform_remote_state.eks.outputs.cluster_security_group_id, data.terraform_remote_state.bastion.outputs.bastion_sg_id]            
 }
