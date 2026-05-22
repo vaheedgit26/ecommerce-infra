@@ -27,7 +27,7 @@ data "terraform_remote_state" "eks" {
 # --------------------------------------------------------------------
 # Reference the Remote State from BASTION Project
 # --------------------------------------------------------------------
-data "terraform_remote_state" "eks" {
+data "terraform_remote_state" "bastion" {
   backend = "s3"
 
   config = {
