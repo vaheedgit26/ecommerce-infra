@@ -14,5 +14,5 @@ module "rds" {
   username                = var.db_username
   password                = var.db_password
   db_subnet_group_name    = "${var.project}-${var.env}-rds-subnet-group"  # var.db_subnet_group_name
-  vpc_security_group_ids  = module.rds_postgre_sg.sg                      # var.vpc_security_group_ids
+  vpc_security_group_ids  = module.rds_postgre_sg.sg_id                   # var.vpc_security_group_ids
 }
