@@ -18,6 +18,7 @@ module "vpc" {
   common_tags  = local.common_tags
 
   # EKS VPC only (skip for normal VPC)
+  eks_cluster_name            = local.eks_cluster_name
   eks_vpc_public_subnet_tags  = local.eks_vpc_public_subnet_tags       # For ELB (external) purpose
   eks_vpc_private_subnet_tags = local.eks_vpc_private_subnet_tags      # For ELB (internal) purpose
 }
