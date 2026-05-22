@@ -38,23 +38,23 @@ data "terraform_remote_state" "bastion" {
 }
 
 # --------------------------------------------------------------------
-# Output the VPC ID from the remote VPC state
+# Output the AZ from the remote VPC state
 # --------------------------------------------------------------------
-output "vpc_id" {
-  value = data.terraform_remote_state.vpc.outputs.vpc_id
+output "az" {
+  value = data.terraform_remote_state.vpc.outputs.availability_zones[0]
 }
 
 # --------------------------------------------------------------------
-# Output the list of private subnets from the VPC
+# Output the EKS cluster security group id
 # --------------------------------------------------------------------
-output "private_subnet_ids" {
-  value = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+output "eks_cluster_sg_id" {
+  value = data.terraform_remote_state.eks.outputs.cluster_security_group_id
 }
 
 
 # --------------------------------------------------------------------
-# Output the list of public subnets from the VPC
+# Output the BASTION security group id
 # --------------------------------------------------------------------
-output "public_subnet_ids" {
-  value = data.terraform_remote_state.vpc.outputs.public_subnet_ids
+output "bastion_sg_id" {
+  value = data.terraform_remote_state.bastion.outputs.bastion_sg_id
 }
