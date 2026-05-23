@@ -1,1 +1,1 @@
-
+variable "db_password" {}
