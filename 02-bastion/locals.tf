@@ -1,6 +1,6 @@
 locals {
 
-  sg_name = "${var.project}-${var.env}-bastion_sg"
+  sg_name = "${var.project}-${var.env}-bastion-sg"
 
   common_tags = {
     Project     = var.project
