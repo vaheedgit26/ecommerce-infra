@@ -11,8 +11,8 @@ module "rds" {
   storage_type            = "gp2"
   storage_encrypted       = false   # true
   db_name                 = "ecommercedb"
-  username                = var.db_username
-  password                = var.db_password
+  username                = local.ecommerce_secret_json.db_username
+  password                = local.ecommerce_secret_json.db_password
   db_subnet_group_name    = "${var.project}-${var.env}-postgre-rds-db-subnet-group" 
   vpc_security_group_ids  = [data.terraform_remote_state.eks.outputs.cluster_security_group_id, data.terraform_remote_state.bastion.outputs.bastion_sg_id]            
 }
