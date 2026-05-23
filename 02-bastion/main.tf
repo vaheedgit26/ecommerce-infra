@@ -29,7 +29,7 @@ module "bastion_ec2" {
   sg_ids                      = [module.bastion_sg.sg_id]         # [local.sg_id]
   subnet_id                   = data.terraform_remote_state.vpc.outputs.public_subnet_ids[0]   # local.public_subnet_ids[0] 
   associate_public_ip_address = true
-  what_type_instance          = "bastion"
+  what_type_instance          = "Bastion"
 
   # user_data = file("${path.module}/mysql_client_8.sh")
  
