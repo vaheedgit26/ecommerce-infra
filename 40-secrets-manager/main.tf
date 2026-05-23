@@ -6,4 +6,6 @@ module "secrets_manager" {
   secret_name = local.db_secret_name      # /ecommerce/dev/db-credentials
   db_username = var.db_username
   db_password = var.db_password
+
+  common_tags = local.common_tags
 }
