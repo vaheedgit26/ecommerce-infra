@@ -4,6 +4,6 @@ module "secrets_manager" {
   project     = var.project          # "ecommerce"
   env         = var.env              # "dev"
 
-  db_username = "pharmaadmin"
+  db_username = "ecommerceadmin"
   db_password = var.db_password
 }
