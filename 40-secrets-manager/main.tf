@@ -3,7 +3,7 @@ module "secrets_manager" {
 
   project     = var.project          # "ecommerce"
   env         = var.env              # "dev"
-
+  secret_name = var.secret_name      # /ecommerce/dev/db-credentials
   db_username = var.db_username
   db_password = var.db_password
 }
