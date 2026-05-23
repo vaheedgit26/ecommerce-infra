@@ -38,6 +38,19 @@ data "terraform_remote_state" "bastion" {
 }
 
 # --------------------------------------------------------------------
+# Reference the Remote State from SECRETS-MANAGER Project
+# --------------------------------------------------------------------
+data "terraform_remote_state" "secrets-manager" {
+  backend = "s3"
+
+  config = {
+    bucket = var.remote_state_s3_bucket                                           # Name of the remote S3 bucket where the SECRETS-MANAGER state is stored
+    key    = "${var.project}/${var.env}/secrets-manager/terraform.tfstate"        # Path to the VPC tfstate file within the bucket
+    region = var.region                                                           # Region where the S3 bucket and DynamoDB table exist
+  }
+}
+
+# --------------------------------------------------------------------
 # Output the AZ from the remote VPC state
 # --------------------------------------------------------------------
 output "az" {
@@ -57,4 +70,11 @@ output "eks_cluster_sg_id" {
 # --------------------------------------------------------------------
 output "bastion_sg_id" {
   value = data.terraform_remote_state.bastion.outputs.bastion_sg_id
+}
+
+# --------------------------------------------------------------------
+# Output the SECRETS-MANAGER security group id
+# --------------------------------------------------------------------
+output "secret_name" {
+  value = data.terraform_remote_state.secrets-manager.outputs.db_secret_name
 }
