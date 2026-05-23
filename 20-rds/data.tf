@@ -6,7 +6,3 @@ data "aws_secretsmanager_secret" "retailstore_secret" {
 data "aws_secretsmanager_secret_version" "retailstore_secret_value" {
   secret_id = data.aws_secretsmanager_secret.retailstore_secret.id
 }
-
-locals {
-  ecommerce_secret_json = jsondecode(data.aws_secretsmanager_secret_version.retailstore_secret_value.secret_string)
-}
