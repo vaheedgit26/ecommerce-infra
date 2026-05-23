@@ -6,5 +6,5 @@ locals {
     Terraform   = "True"
   }
 
-  db_secret_name ="/${var.project}/${var.env}/db-credentials"
+  postgre_db_secret_name ="/${var.project}/${var.env}/postgre-db-credentials"
 }
