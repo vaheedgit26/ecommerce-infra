@@ -8,5 +8,5 @@ data "aws_secretsmanager_secret_version" "retailstore_secret_value" {
 }
 
 locals {
-  retailstore_secret_json = jsondecode(data.aws_secretsmanager_secret_version.retailstore_secret_value.secret_string)
+  ecommerce_secret_json = jsondecode(data.aws_secretsmanager_secret_version.retailstore_secret_value.secret_string)
 }
