@@ -6,4 +6,6 @@ module "s3" {
   project        = var.project
   env            = var.env
   region         = var.region
+
+  common_tags    = local.common_tags
 }
