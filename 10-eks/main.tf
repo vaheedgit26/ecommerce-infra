@@ -21,7 +21,7 @@ module "eks" {
 
   # Cluster access from Bastion
   enable_bastion_access = true
-  bastion_sg_id         = module.bastion_sg.sg_id
+  bastion_sg_id         = data.terraform_remote_state.bastion.outputs.bastion_sg_id
 
   # node_ssh_public_key = "us-east-1"
   # node_addl_sg_ids    = [module.bastion_sg.sg_id]               # SSH to Node instance, This is additional cluster SG and the default cluster SG is intact
