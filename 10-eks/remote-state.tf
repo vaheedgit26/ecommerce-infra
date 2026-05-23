@@ -50,5 +50,5 @@ output "public_subnet_ids" {
 # Output the BASTION SG from the remote BASTION state
 # --------------------------------------------------------------------
 output "bastion_sg_id" {
-  value = data.terraform_remote_state.bastion.outputs.sg_id
+  value = data.terraform_remote_state.bastion.outputs.bastion_sg_id
 }
