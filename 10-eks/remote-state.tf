@@ -5,9 +5,22 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
 
   config = {
-    bucket = var.remote_state_s3_bucket                                          # Name of the remote S3 bucket where the VPC state is stored
+    bucket = var.remote_state_s3_bucket                                   # Name of the remote S3 bucket where the VPC state is stored
     key    = "${var.project}/${var.env}/vpc/terraform.tfstate"            # Path to the VPC tfstate file within the bucket
-    region = var.region                                               # Region where the S3 bucket and DynamoDB table exist
+    region = var.region                                                   # Region where the S3 bucket and DynamoDB table exist
+  }
+}
+
+# --------------------------------------------------------------------
+# Reference the Remote State from BASTION Project
+# --------------------------------------------------------------------
+data "terraform_remote_state" "bastion" {
+  backend = "s3"
+
+  config = {
+    bucket = var.remote_state_s3_bucket                                   # Name of the remote S3 bucket where the VPC state is stored
+    key    = "${var.project}/${var.env}/bastion/terraform.tfstate"        # Path to the BASTION tfstate file within the bucket
+    region = var.region                                                   # Region where the S3 bucket and DynamoDB table exist
   }
 }
 
@@ -31,4 +44,11 @@ output "private_subnet_ids" {
 # --------------------------------------------------------------------
 output "public_subnet_ids" {
   value = data.terraform_remote_state.vpc.outputs.public_subnet_ids
+}
+
+# --------------------------------------------------------------------
+# Output the BASTION SG from the remote BASTION state
+# --------------------------------------------------------------------
+output "bastion_sg_id" {
+  value = data.terraform_remote_state.bastion.outputs.sg_id
 }
