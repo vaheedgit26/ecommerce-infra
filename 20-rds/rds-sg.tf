@@ -6,8 +6,6 @@ module "rds_postgre_sg" {
   sg_name        = local.sg_name
   sg_description = "Postgre RDS Instance Security Group"
 
-  project        = var.project
-  env            = var.env
   common_tags    = local.common_tags
 }
 
