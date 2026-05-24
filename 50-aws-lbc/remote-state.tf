@@ -44,3 +44,10 @@ output "eks_cluster_name" {
 output "eks_cluster_endpoint" {
   value = data.terraform_remote_state.eks.outputs.cluster_endpoint
 }
+
+# --------------------------------------------------------------------
+# Output the EKS cluster ca
+# --------------------------------------------------------------------
+output "eks_cluster_ca" {
+  value = data.terraform_remote_state.eks.outputs.cluster_ca
+}
