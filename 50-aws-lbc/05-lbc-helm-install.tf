@@ -54,6 +54,12 @@ resource "helm_release" "loadbalancer_controller" {
     {
       name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
       value = aws_iam_role.lbc_iam_role.arn
+    },
+
+    # Install CRDs
+    {
+      name  = "crds.create"
+      value = "true"
     }
   ]       
 }
