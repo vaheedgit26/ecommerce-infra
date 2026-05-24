@@ -47,10 +47,11 @@ resource "helm_release" "loadbalancer_controller" {
       value = "${var.aws_region}"
     },
 
-   {
+    # Service Account annotation with IAM Role
+    {
       name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
       value = aws_iam_role.lbc_iam_role.arn
-   }
+    }
   ]       
 }
 
