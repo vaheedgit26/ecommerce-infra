@@ -1,6 +1,9 @@
 # Install AWS Load Balancer Controller using HELM
 resource "helm_release" "loadbalancer_controller" {
-  depends_on = [ aws_iam_role.lbc_iam_role ]
+  depends_on = [
+    aws_iam_role.lbc_iam_role,
+    aws_iam_role_policy_attachment.lbc_iam_role_policy_attach
+  ]
          
   name       = "aws-load-balancer-controller"
   repository = "https://aws.github.io/eks-charts"
