@@ -1,4 +1,3 @@
-
 # Resource: Create AWS Load Balancer Controller IAM Policy 
 resource "aws_iam_policy" "lbc_iam_policy" {
   name        = "${local.name}-AWSLoadBalancerControllerIAMPolicy"
