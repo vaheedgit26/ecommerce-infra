@@ -17,7 +17,8 @@ resource "aws_iam_role" "lbc_iam_role" {
 
   tags = {
     Name        = "${local.resource_name}-lbc-iam-role"
-    Environment = var.environment_name
+    Environment = var.env
+    Terraform   = "True"
     Component   = "AWS Load Balancer Controller"
   }
 }
