@@ -7,13 +7,13 @@ data "aws_iam_policy_document" "alb_controller_trust_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(var.oidc_provider_url, "https://", "")}:sub"
+      variable = "${replace(local.oidc_provider_url, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:aws-load-balancer-controller"]
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(var.oidc_provider_url, "https://", "")}:aud"
+      variable = "${replace(local.oidc_provider_url, "https://", "")}:aud"
       values   = ["sts.amazonaws.com"]
     }
 
