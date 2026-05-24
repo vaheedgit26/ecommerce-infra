@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "alb_controller_trust_policy" {
     }
 
     principals {
-      identifiers = [var.oidc_provider_arn]
+      identifiers = [local.oidc_provider_arn]
       type        = "Federated"
     }
   }
