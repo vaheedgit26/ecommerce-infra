@@ -37,3 +37,10 @@ output "vpc_id" {
 output "eks_cluster_name" {
   value = data.terraform_remote_state.eks.outputs.cluster_name
 }
+
+# --------------------------------------------------------------------
+# Output the EKS cluster endpoint
+# --------------------------------------------------------------------
+output "eks_cluster_endpoint" {
+  value = data.terraform_remote_state.eks.outputs.cluster_endpoint
+}
