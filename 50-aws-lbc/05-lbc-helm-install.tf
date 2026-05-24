@@ -35,13 +35,13 @@ resource "helm_release" "loadbalancer_controller" {
     # EKS Cluster Name
     {
       name  = "clusterName"
-      value = "${data.terraform_remote_state.eks.outputs.cluster_name}"
+      value = "${local.eks_cluster_name}"
     },
 
     # VPC Id     
     {
       name  = "vpcId"
-      value = "${data.terraform_remote_state.vpc.outputs.vpc_id}"
+      value = "${local.vpc_id}"
     },
 
     # AWS Region
