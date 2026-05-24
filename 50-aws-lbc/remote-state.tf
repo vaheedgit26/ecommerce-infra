@@ -23,3 +23,8 @@ data "terraform_remote_state" "eks" {
     region = var.region                                               # Region where the S3 bucket and DynamoDB table exist
   }
 }
+
+# Datasource: EKS Cluster Auth 
+data "aws_eks_cluster_auth" "cluster" {
+  name = local.eks_cluster_name
+}
