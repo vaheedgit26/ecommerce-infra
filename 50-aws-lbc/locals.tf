@@ -6,4 +6,6 @@ locals {
 
   eks_host  = data.terraform_remote_state.eks.outputs.cluster_endpoint
   eks_cluster_ca_certificate = data.terraform_remote_state.eks.outputs.cluster_ca
+
+  eks_cluster_name = data.terraform_remote_state.eks.outputs.cluster_name
 }
