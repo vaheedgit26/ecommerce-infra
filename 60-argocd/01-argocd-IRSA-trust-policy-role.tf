@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "argocd_trust_policy" {
 }
 
 resource "aws_iam_role" "argocd_role" {
-  name               = "${var.project}-${var.env}-argocd-role"
+  name               = "${local.resource_name}-argocd-role"
   assume_role_policy = data.aws_iam_policy_document.argocd_trust_policy.json
 
   tags = {
