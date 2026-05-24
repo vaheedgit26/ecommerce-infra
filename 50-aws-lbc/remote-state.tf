@@ -51,3 +51,17 @@ output "eks_cluster_endpoint" {
 output "eks_cluster_ca" {
   value = data.terraform_remote_state.eks.outputs.cluster_ca
 }
+
+# --------------------------------------------------------------------
+# Output the EKS cluster OIDC URL
+# --------------------------------------------------------------------
+output "eks_cluster_ca" {
+  value = data.terraform_remote_state.eks.outputs.oidc_provider_url
+}
+
+# --------------------------------------------------------------------
+# Output the EKS cluster OIDC ARN
+# --------------------------------------------------------------------
+output "eks_cluster_ca" {
+  value = data.terraform_remote_state.eks.outputs.oidc_provider_arn
+}
