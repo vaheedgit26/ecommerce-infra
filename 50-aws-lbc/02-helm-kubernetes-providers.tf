@@ -1,8 +1,3 @@
-# Datasource: EKS Cluster Auth 
-data "aws_eks_cluster_auth" "cluster" {
-  name = local.eks_cluster_name
-}
-
 # HELM Provider
 provider "helm" {
   kubernetes = {
