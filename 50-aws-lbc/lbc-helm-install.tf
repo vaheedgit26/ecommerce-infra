@@ -16,6 +16,10 @@ resource "helm_release" "loadbalancer_controller" {
   timeout         = 600
   cleanup_on_fail = true 
 
+  # recreate_pods   = true
+  # replace         = true
+  # force_update    = true
+
   set = [
     # Create Service Account via Helm   
     {
