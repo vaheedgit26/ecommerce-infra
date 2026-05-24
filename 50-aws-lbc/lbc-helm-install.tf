@@ -36,7 +36,7 @@ resource "helm_release" "loadbalancer_controller" {
     # EKS Cluster Name
     {
       name  = "clusterName"
-      value = "${aws_eks_cluster.main.id}"
+      value = "${data.terraform_remote_state.eks.outputs.}"
     },
 
     # VPC Id     
