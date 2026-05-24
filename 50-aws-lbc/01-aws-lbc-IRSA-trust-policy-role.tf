@@ -1,5 +1,5 @@
 # https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html
-# AWS LBC IRSA Role
+# AWS LBC IRSA Role ( Trust Policy )
 
 data "aws_iam_policy_document" "alb_controller_trust_policy" {
   statement {
