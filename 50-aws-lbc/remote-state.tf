@@ -27,7 +27,7 @@ data "terraform_remote_state" "eks" {
 # --------------------------------------------------------------------
 # Output the VPC id
 # --------------------------------------------------------------------
-output "eks_cluster_name" {
+output "vpc_id" {
   value = data.terraform_remote_state.vpc.outputs.vpc_id
 }
 
