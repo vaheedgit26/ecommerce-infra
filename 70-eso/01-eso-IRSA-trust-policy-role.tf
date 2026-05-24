@@ -5,7 +5,7 @@ data "aws_iam_policy_document" "eso_trust_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(var..eks_oidc_provider_url, "https://", "")}:sub"
+      variable = "${replace(var.eks_oidc_provider_url, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:external-secrets"]
     }
 
