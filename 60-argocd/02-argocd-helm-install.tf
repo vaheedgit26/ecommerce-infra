@@ -5,10 +5,14 @@ resource "helm_release" "argocd" {
   version          = "9.3.1"
   namespace        = "argocd"
   create_namespace = true
-  #   timeout          = 2000
-  cleanup_on_fail = true
-  recreate_pods   = true
-  replace         = true
+  
+  wait            = true         # Wait for resources to become Ready
+  timeout         = 600
+  cleanup_on_fail = true 
+
+  # recreate_pods   = true
+  # replace         = true
+  # force_update    = true
 
   set {
     name  = "server.service.type"
