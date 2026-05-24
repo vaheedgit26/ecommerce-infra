@@ -1,6 +1,6 @@
 # Resource: Create AWS Load Balancer Controller IAM Policy 
 resource "aws_iam_policy" "lbc_iam_policy" {
-  name        = "${local.name}-AWSLoadBalancerControllerIAMPolicy"
+  name        = "${local.resource_name}-AWSLoadBalancerControllerIAMPolicy"
   path        = "/"
   description = "AWS Load Balancer Controller IAM Policy"
   policy = data.http.lbc_iam_policy.response_body
@@ -12,11 +12,11 @@ output "lbc_iam_policy_arn" {
 
 # Resource: Create IAM Role 
 resource "aws_iam_role" "lbc_iam_role" {
-  name = "${local.name}-lbc-iam-role"
+  name = "${local.resource_name}-lbc-iam-role"
   assume_role_policy = data.aws_iam_policy_document.alb_controller_trust_policy.json
 
   tags = {
-    Name        = "${local.name}-lbc-iam-role"
+    Name        = "${local.resource_name}-lbc-iam-role"
     Environment = var.environment_name
     Component   = "AWS Load Balancer Controller"
   }
