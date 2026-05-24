@@ -37,5 +37,4 @@ data "kubernetes_service_v1" "argocd_server" {
     name      = "argocd-server"
     namespace = "argocd"
   }
-  depends_on = [helm_release.aws-load-balancer-controller]
 }
