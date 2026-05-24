@@ -6,7 +6,7 @@ resource "helm_release" "loadbalancer_controller" {
   repository = "https://aws.github.io/eks-charts"
   chart      = "aws-load-balancer-controller"
   namespace = "kube-system" 
-  # version  = "1.13.0"         # Recommended in prod, if not specified always uses latest version   
+  # version  = "1.17.0"          # Recommended in prod, if not specified always uses latest version   
 
   wait            = true         # Wait for resources to become Ready
   timeout         = 600
