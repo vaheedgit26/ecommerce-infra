@@ -1,3 +1,6 @@
+data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
+
 # --------------------------------------------------------------------
 # Reference the Remote State from EKS Project
 # --------------------------------------------------------------------
