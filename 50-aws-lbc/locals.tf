@@ -1,6 +1,8 @@
 locals {
   resource_name = "${var.project}-${var.env}"
 
+  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+
   eks_oidc_provider_url = data.terraform_remote_state.eks.outputs.oidc_provider_url
   eks_oidc_provider_arn = data.terraform_remote_state.eks.outputs.oidc_provider_arn
 
