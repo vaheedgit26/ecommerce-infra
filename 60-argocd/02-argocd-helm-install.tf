@@ -12,7 +12,7 @@ resource "helm_release" "argocd" {
 
   set {
     name  = "server.service.type"
-    value = "LoadBalancer" #LoadBalancer #ClusterIP #NodePort
+    value = "ClusterIP"                # LoadBalancer # ClusterIP # NodePort
   }
 
   set {
@@ -26,16 +26,10 @@ resource "helm_release" "argocd" {
   }
 
   set {
-    name  = "server.service.annotations.service\\.beta\\.kubernetes\\.io/aws-load-balancer-internal"
-    value = "false"
-  }
-
-  set {
     name  = "crds.keep"
     value = "false"
   }
 
-  depends_on = [helm_release.aws-load-balancer-controller]
 }
 
 data "kubernetes_service_v1" "argocd_server" {
