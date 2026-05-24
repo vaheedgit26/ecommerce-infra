@@ -24,6 +24,7 @@ data "aws_iam_policy_document" "alb_controller_trust_policy" {
   }
 }
 
+/*
 resource "aws_iam_role" "alb_controller_role" {
   name               = "${var.project}-${var.env}-alb-controller-role"
   assume_role_policy = data.aws_iam_policy_document.alb_controller_trust_policy.json
@@ -34,3 +35,4 @@ resource "aws_iam_role" "alb_controller_role" {
     Project = var.project
   }
 }
+*/
