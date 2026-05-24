@@ -73,7 +73,7 @@ output "bastion_sg_id" {
 }
 
 # --------------------------------------------------------------------
-# Output the SECRETS-MANAGER security group id
+# Output the SECRETS-MANAGER secret name
 # --------------------------------------------------------------------
 output "secret_name" {
   value = data.terraform_remote_state.secrets-manager.outputs.db_secret_name
