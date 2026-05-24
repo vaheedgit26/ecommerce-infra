@@ -14,7 +14,7 @@ output "lbc_iam_policy_arn" {
 # Resource: Create IAM Role 
 resource "aws_iam_role" "lbc_iam_role" {
   name = "${local.name}-lbc-iam-role"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.alb_controller_trust_policy.json
 
   tags = {
     Name        = "${local.name}-lbc-iam-role"
