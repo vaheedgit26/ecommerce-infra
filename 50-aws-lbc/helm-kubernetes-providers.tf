@@ -1,6 +1,6 @@
 # Datasource: EKS Cluster Auth 
 data "aws_eks_cluster_auth" "cluster" {
-  name = aws_eks_cluster.main.id
+  name = aws_eks_cluster.main.id   # update form remote state
 }
 
 # HELM Provider
