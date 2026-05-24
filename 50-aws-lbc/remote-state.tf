@@ -23,3 +23,17 @@ data "terraform_remote_state" "eks" {
     region = var.region                                               # Region where the S3 bucket and DynamoDB table exist
   }
 }
+
+# --------------------------------------------------------------------
+# Output the VPC id
+# --------------------------------------------------------------------
+output "eks_cluster_name" {
+  value = data.terraform_remote_state.vpc.outputs.vpc_id
+}
+
+# --------------------------------------------------------------------
+# Output the EKS cluster name
+# --------------------------------------------------------------------
+output "eks_cluster_name" {
+  value = data.terraform_remote_state.eks.outputs.cluster_name
+}
