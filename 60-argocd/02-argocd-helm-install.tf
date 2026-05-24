@@ -20,11 +20,6 @@ resource "helm_release" "argocd" {
   }
 
   set {
-    name  = "server.ingress.enabled"
-    value = "false"
-  }
-
-  set {
     name  = "server.extraArgs[0]"
     value = "--insecure"
   }
