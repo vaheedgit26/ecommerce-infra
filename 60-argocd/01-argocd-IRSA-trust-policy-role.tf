@@ -6,18 +6,18 @@ data "aws_iam_policy_document" "argocd_trust_policy" {
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(var.oidc_provider_url, "https://", "")}:sub"
+      variable = "${replace(var.eks_oidc_provider_url, "https://", "")}:sub"
       values   = ["system:serviceaccount:argocd:argocd-application-controller"]
     }
 
     condition {
       test     = "StringEquals"
-      variable = "${replace(var.oidc_provider_url, "https://", "")}:aud"
+      variable = "${replace(var.eks_oidc_provider_url, "https://", "")}:aud"
       values   = ["sts.amazonaws.com"]
     }
 
     principals {
-      identifiers = [var.oidc_provider_arn]
+      identifiers = [var.eks_oidc_provider_arn]
       type        = "Federated"
     }
   }
