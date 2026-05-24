@@ -44,7 +44,7 @@ resource "helm_release" "loadbalancer_controller" {
     # AWS Region
     {
       name  = "region"
-      value = "${var.aws_region}"
+      value = "${var.region}"
     },
 
     # Service Account annotation with IAM Role
