@@ -6,5 +6,5 @@ locals {
 
   eks_host = data.terraform_remote_state.eks.outputs.cluster_endpoint
   eks_cluster_ca_certificate = data.terraform_remote_state.eks.outputs.cluster_ca
-  token = data.aws_eks_cluster_auth.cluster.token
+  eks_token = data.aws_eks_cluster_auth.cluster.token
 }
