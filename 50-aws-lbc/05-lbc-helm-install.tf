@@ -22,7 +22,7 @@ resource "helm_release" "loadbalancer_controller" {
   set = [
     # Create Service Account via Helm   
     {
-      name  = "serviceAccount.create"
+      name  = "serviceAccount.create"           # RBAC is created automatically, no need to set explicitly
       value = "true"
     },
 
