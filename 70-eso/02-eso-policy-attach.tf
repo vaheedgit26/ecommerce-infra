@@ -5,8 +5,9 @@ resource "aws_iam_policy" "eso_secrets_policy" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
+
+      # 🔐 Secrets Manager access (your existing)
       {
-        # 🔐 Secrets Manager access (your existing)
         Effect = "Allow"
         Action = [
           "secretsmanager:GetSecretValue",
