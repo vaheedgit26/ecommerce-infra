@@ -17,7 +17,7 @@ resource "helm_release" "cluster_autoscaler" {
   create_namespace = false
 
   # Pin version (important for stability)
-  version = "9.29.0" # adjust based on your k8s version
+  # version = "9.29.0" # adjust based on your k8s version
 
   values = [
     yamlencode({
