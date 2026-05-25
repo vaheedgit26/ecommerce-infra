@@ -27,7 +27,7 @@ resource "aws_iam_role" "ebs_csi_role" {
   assume_role_policy = data.aws_iam_policy_document.ebs_csi_trust_policy.json
 
   tags = {
-    Name    = "${local.resource_name}-ebi-csi-role"
+    Name    = "${local.resource_name}-ebs-csi-role"
     Env     = var.env
     Project = var.project
   }
