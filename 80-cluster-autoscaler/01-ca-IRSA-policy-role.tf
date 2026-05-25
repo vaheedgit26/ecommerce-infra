@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "cluster_autoscaler_trust_policy" {
 }
 
 resource "aws_iam_role" "cluster_autoscaler_role" {
-  name               = "${local.resource_name}-eso-role"
+  name               = "${local.resource_name}-cluster_autoscaler-role"
   assume_role_policy = data.aws_iam_policy_document.cluster_autoscaler_trust_policy.json
 
   tags = {
