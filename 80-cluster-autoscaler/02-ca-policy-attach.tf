@@ -7,6 +7,7 @@ resource "aws_iam_policy" "cluster_autoscaler_policy" {
     Statement = [
       {
         Effect = "Allow"
+        /*
         Action = [
           "autoscaling:DescribeAutoScalingGroups",
           "autoscaling:DescribeAutoScalingInstances",
@@ -22,7 +23,7 @@ resource "aws_iam_policy" "cluster_autoscaler_policy" {
           "ec2:DescribeImages",
           "ec2:GetInstanceTypesFromInstanceRequirements",
           "eks:DescribeNodegroup"
-        ]
+        ] */
         Resource = "*"
       },
       {
