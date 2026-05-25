@@ -39,6 +39,6 @@ resource "helm_release" "external_secrets" {
   ]
 
   depends_on = [
-    aws_iam_role_policy_attachment.eso_secrets_attachment
+    aws_iam_role_policy_attachment.eso_secrets_policy_attachment
   ]
 }
