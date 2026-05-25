@@ -48,10 +48,11 @@ resource "helm_release" "cluster_autoscaler" {
       }
 
       extraArgs = {
+        cluster-name = local.eks_cluster_name
         balance-similar-node-groups    = "true"
         skip-nodes-with-system-pods    = "false"
         skip-nodes-with-local-storage  = "false"
-        expander                      = "least-waste"
+        expander                       = "least-waste"
 
         node-group-auto-discovery = "asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/${local.eks_cluster_name}"
       }
