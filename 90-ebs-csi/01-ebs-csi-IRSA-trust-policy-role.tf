@@ -6,7 +6,7 @@ data "aws_iam_policy_document" "ebs_csi_trust_policy" {
     condition {
       test     = "StringEquals"
       variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:kube-system:external-secrets"]
+      values   = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
     }
 
     condition {
