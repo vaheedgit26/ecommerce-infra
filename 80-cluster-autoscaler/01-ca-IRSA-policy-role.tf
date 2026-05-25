@@ -23,11 +23,11 @@ data "aws_iam_policy_document" "cluster_autoscaler_trust_policy" {
 }
 
 resource "aws_iam_role" "cluster_autoscaler_role" {
-  name               = "${local.resource_name}-cluster_autoscaler-role"
+  name               = "${local.resource_name}-cluster-autoscaler-role"
   assume_role_policy = data.aws_iam_policy_document.cluster_autoscaler_trust_policy.json
 
   tags = {
-    Name    = "${local.resource_name}-cluster_autoscaler-role"
+    Name    = "${local.resource_name}-cluster-autoscaler-role"
     Env     = var.env
     Project = var.project
   }
