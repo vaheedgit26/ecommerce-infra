@@ -29,7 +29,7 @@ resource "aws_eks_addon" "ebs_csi" {
 
   tags = {
     Name        = "${local.resource_name}-aws-ebs-csi-addon"
-    Project     = var.Project
+    Project     = var.project
     Environment = var.env
     Component   = "Amazon EBS CSI Driver"
   }
