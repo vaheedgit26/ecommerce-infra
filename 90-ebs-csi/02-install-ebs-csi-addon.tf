@@ -1,13 +1,13 @@
 # Datasource: Get the default EBS CSI addon version compatible with EKS version
 data "aws_eks_addon_version" "ebs_csi_default" {
   addon_name         = "aws-ebs-csi-driver"
-  kubernetes_version = aws_eks_cluster.main.version
+  kubernetes_version = local.eks_cluster_version
 }
 
 # Datasource: Get the latest available EBS CSI addon version
 data "aws_eks_addon_version" "ebs_csi_latest" {
   addon_name         = "aws-ebs-csi-driver"
-  kubernetes_version = aws_eks_cluster.main.version
+  kubernetes_version = local.eks_cluster_version
   most_recent        = true
 }
 
