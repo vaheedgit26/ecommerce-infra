@@ -14,7 +14,7 @@ resource "helm_release" "cluster_autoscaler" {
   chart      = "cluster-autoscaler"
 
   # 👉 Use a recent stable chart 
-  version = "9.35.0"  # safe modern chart (works with newer k8s)
+  version = "9.35.0"  # compatible with your k8s version: 1.33  (safe modern chart, works with newer k8s)
 
   create_namespace = false
 
