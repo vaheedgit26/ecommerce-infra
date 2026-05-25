@@ -13,19 +13,17 @@ resource "helm_release" "cluster_autoscaler" {
   repository = "https://kubernetes.github.io/autoscaler"
   chart      = "cluster-autoscaler"
 
-  # Optional but recommended
-  create_namespace = false
+  # 👉 Use a recent stable chart 
+  version = "9.35.0"  # safe modern chart (works with newer k8s)
 
-  # Pin version (important for stability)
-  # version = "9.33.0" # adjust based on your k8s version
+  create_namespace = false
 
   values = [
     yamlencode({
       replicaCount = 1
 
       cloudProvider = "aws"
-
-      awsRegion = var.region
+      awsRegion     = var.region
 
       autoDiscovery = {
         clusterName = local.eks_cluster_name
@@ -36,18 +34,26 @@ resource "helm_release" "cluster_autoscaler" {
         serviceAccount = {
           create = true
           name   = "cluster-autoscaler"
+
           annotations = {
             "eks.amazonaws.com/role-arn" = aws_iam_role.cluster_autoscaler_role.arn
           }
         }
       }
 
+      # 🔥 IMPORTANT → force correct autoscaler version
+      image = {
+        repository = "registry.k8s.io/autoscaling/cluster-autoscaler"
+        tag        = "v1.33.0"
+      }
+
       extraArgs = {
-        "balance-similar-node-groups"      = "true"
-        "skip-nodes-with-system-pods"      = "false"
-        "skip-nodes-with-local-storage"   = "false"
-        "expander"                        = "least-waste"
-        "node-group-auto-discovery"       = "asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/${local.eks_cluster_name}"
+        balance-similar-node-groups    = "true"
+        skip-nodes-with-system-pods    = "false"
+        skip-nodes-with-local-storage  = "false"
+        expander                      = "least-waste"
+
+        node-group-auto-discovery = "asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/${local.eks_cluster_name}"
       }
 
       resources = {
@@ -60,14 +66,6 @@ resource "helm_release" "cluster_autoscaler" {
           memory = "600Mi"
         }
       }
-
-      tolerations = [
-        {
-          key      = "node-role.kubernetes.io/control-plane"
-          operator = "Exists"
-          effect   = "NoSchedule"
-        }
-      ]
     })
   ]
 
