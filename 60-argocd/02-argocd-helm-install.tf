@@ -24,11 +24,6 @@ resource "helm_release" "argocd" {
   # force_update    = true
 
   set {
-    name  = "installCRDs"
-    value = "true"
-  }
-
-  set {
     name  = "server.service.type"
     value = "ClusterIP"                # LoadBalancer # ClusterIP # NodePort
   }
@@ -36,6 +31,16 @@ resource "helm_release" "argocd" {
   set {
     name  = "server.extraArgs[0]"
     value = "--insecure"
+  }
+
+  set {
+    name  = "rbac.create"
+    value = "true"
+  }
+
+  set {
+    name  = "installCRDs"
+    value = "true"
   }
 
   set {
