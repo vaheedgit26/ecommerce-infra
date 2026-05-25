@@ -22,12 +22,12 @@ data "aws_iam_policy_document" "ebs_csi_trust_policy" {
   }
 }
 
-resource "aws_iam_role" "eso_role" {
+resource "aws_iam_role" "ebs_csi_role" {
   name               = "${local.resource_name}-eso-role"
   assume_role_policy = data.aws_iam_policy_document.ebs_csi_trust_policy.json
 
   tags = {
-    Name    = "${local.resource_name}-eso-role"
+    Name    = "${local.resource_name}-ebi-csi-role"
     Env     = var.env
     Project = var.project
   }
