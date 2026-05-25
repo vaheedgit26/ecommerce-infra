@@ -71,6 +71,7 @@ resource "helm_release" "cluster_autoscaler" {
   ]
 
   depends_on = [
+    aws_iam_role.cluster_autoscaler_role,
     aws_iam_role_policy_attachment.cluster_autoscaler_policy_attachment
   ]
 }
