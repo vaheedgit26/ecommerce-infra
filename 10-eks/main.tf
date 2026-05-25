@@ -18,7 +18,7 @@ module "eks" {
   node_subnet_ids       = data.terraform_remote_state.vpc.outputs.private_subnet_ids
   node_instance_types   = ["t3.small"]
   node_capacity_type    = "SPOT"        # ON_DEMAND/ SPOT
-  node_auto_scaler_tags = var.node_auto_scaler_tags
+  node_auto_scaler_tags = local.node_auto_scaler_tags
 
   # Cluster access from Bastion
   enable_bastion_access = true
