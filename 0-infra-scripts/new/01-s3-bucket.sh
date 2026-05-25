@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+#################################################################
+# Usage:
+#   bash s3-bucket.sh <project_name> <env> <region> <action>
+#
+# Example:
+#   bash 01-s3-bucket.sh ecommerce dev us-east-1 apply
+#   bash 01-s3-bucket.sh ecommerce dev us-east-1 destroy
+#################################################################
+
+set -e
+
+PROJECT=$1
+ENV=$2
+REGION=$3
+ACTION=$4
+
+# Function to handle errors safely depending on context
+abort() {
+    local msg="$1"
+    echo "$msg" >&2
+    if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+        return 1
+    else
+        exit 1
+    fi
+}
+
+# Validate inputs
+if [[ -z "$PROJECT" || -z "$ENV" || -z "$REGION" || -z "$ACTION" ]]; then
+    abort "Usage: source create-s3-bucket.sh <project_name> <env> <region> <plan|apply|destroy>"
+fi
+
+echo """
+📄 Details:
+     PROJECT : ${PROJECT}
+     ENV     : ${ENV}
+     REGION  : ${REGION}
+     ACTION  : ${ACTION}
+"""
+
+# Move to terraform directory
+cd ../00-s3
+
+echo "============================================="
+echo "Step 1: Terraform Init"
+echo "============================================="
+
+terraform init -upgrade
+
+echo "============================================="
+echo "Step 2: Validate"
+echo "============================================="
+
+terraform validate
+
+PLAN_FILE="s3.tfplan"
+
+echo "============================================="
+echo "Step 3: ${ACTION}"
+echo "============================================="
+
+case "$ACTION" in
+
+  plan)
+     terraform plan \
+      -var="project=$PROJECT" \
+      -var="env=$ENV" \
+      -var="region=$REGION" \
+      -out=${PLAN_FILE}
+    ;;
+
+  apply)
+    if [[ -f "${PLAN_FILE}" ]]; then
+      terraform apply ${PLAN_FILE}
+    else
+      echo "⚠️ No plan file found. Running direct apply..."
+      terraform apply \
+        -var="project=$PROJECT" \
+        -var="env=$ENV" \
+        -var="region=$REGION"
+    fi
+    ;;
+
+  destroy)
+    # 🔥 Safety confirmation
+    read -p "⚠️ Are you sure you want to DELETE S3 bucket? Type 'yes' to continue: " CONFIRM
+
+    if [[ "$CONFIRM" != "yes" ]]; then
+        echo "❌ Destroy cancelled"
+        return 1 2>/dev/null || exit 1
+    fi
+
+    terraform destroy \
+      -var="project=$PROJECT" \
+      -var="env=$ENV" \
+      -var="region=$REGION" \
+      -auto-approve
+    ;;
+
+  *)
+    abort "❌ Invalid action: ${ACTION}. Use apply or destroy"
+    ;;
+
+esac
