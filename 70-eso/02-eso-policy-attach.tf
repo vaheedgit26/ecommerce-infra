@@ -6,7 +6,7 @@ resource "aws_iam_policy" "eso_secrets_policy" {
     Version = "2012-10-17"
     Statement = [
 
-      # 🔐 Secrets Manager access (your existing)
+      # 🔐 Secrets Manager access 
       {
         Effect = "Allow"
         Action = [
@@ -16,7 +16,7 @@ resource "aws_iam_policy" "eso_secrets_policy" {
         Resource = "arn:aws:secretsmanager:*:${local.aws_account_id}:secret:/${var.project}/${var.env}/*"
       },
 
-      # 🔐 SSM Parameter Store access (NEW 🔥)
+      # 🔐 SSM Parameter Store access
       {
         Effect = "Allow"
         Action = [
