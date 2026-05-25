@@ -24,6 +24,13 @@ resource "aws_iam_policy" "cluster_autoscaler_policy" {
           "ec2:GetInstanceTypesFromInstanceRequirements",
           "eks:DescribeNodegroup"
         ] */
+        Action = [
+          "autoscaling:Describe*",
+          "autoscaling:SetDesiredCapacity",
+          "autoscaling:TerminateInstanceInAutoScalingGroup",
+          "ec2:Describe*",
+          "eks:DescribeNodegroup"
+        ]
         Resource = "*"
       },
       {
