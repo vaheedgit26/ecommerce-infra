@@ -1,3 +1,8 @@
+# Datasource: EKS Cluster Auth 
+data "aws_eks_cluster_auth" "cluster" {
+  name = local.eks_cluster_name
+}
+
 # --------------------------------------------------------------------
 # Reference the Remote State from VPC Project
 # --------------------------------------------------------------------
@@ -22,9 +27,4 @@ data "terraform_remote_state" "eks" {
     key    = "${var.project}/${var.env}/eks/terraform.tfstate"        # Path to the EKS tfstate file within the bucket
     region = var.region                                               # Region where the S3 bucket and DynamoDB table exist
   }
-}
-
-# Datasource: EKS Cluster Auth 
-data "aws_eks_cluster_auth" "cluster" {
-  name = local.eks_cluster_name
 }
