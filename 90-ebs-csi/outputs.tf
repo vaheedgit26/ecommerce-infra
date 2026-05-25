@@ -1,6 +1,6 @@
-# -------------------------
+# -------------------------------------------------------------
 # EKS outputs
-# -------------------------
+# -------------------------------------------------------------
 output "eks_cluster_name" {
   value = local.eks_cluster_name
 }
@@ -17,9 +17,9 @@ output "eks_oidc_provider_arn" {
   value = local.eks_oidc_provider_arn
 }
 
-# -------------------------
+# -------------------------------------------------------------
 # EBS CSI outputs
-# -------------------------
+# -------------------------------------------------------------
 output "ebs_csi_addon_default_version" {
   description = "Default EBS CSI addon version compatible with the EKS cluster version"
   value       = data.aws_eks_addon_version.ebs_csi_default.version
