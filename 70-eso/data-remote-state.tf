@@ -1,6 +1,11 @@
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
+# Datasource: EKS Cluster Auth 
+data "aws_eks_cluster_auth" "cluster" {
+  name = local.eks_cluster_name
+}
+
 # --------------------------------------------------------------------
 # Reference the Remote State from EKS Project
 # --------------------------------------------------------------------
