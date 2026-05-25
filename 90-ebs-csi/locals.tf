@@ -10,6 +10,6 @@ locals {
   eks_token = data.aws_eks_cluster_auth.cluster.token
   eks_cluster_ca_certificate = data.terraform_remote_state.eks.outputs.cluster_ca
 
-  eks_cluster_name = data.terraform_remote_state.eks.outputs.cluster_name
+  eks_cluster_name    = data.terraform_remote_state.eks.outputs.cluster_name
   eks_cluster_version = data.terraform_remote_state.eks.outputs.cluster_version
 }
