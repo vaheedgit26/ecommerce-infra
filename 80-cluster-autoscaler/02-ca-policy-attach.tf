@@ -39,6 +39,6 @@ resource "aws_iam_policy" "cluster_autoscaler_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "cluster_autoscaler_policy_attachment" {
-  role       = aws_iam_role.eso_role.name
+  role       = aws_iam_role.cluster_autoscaler_role.name
   policy_arn = aws_iam_policy.cluster_autoscaler_policy.arn
 }
