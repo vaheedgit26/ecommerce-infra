@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "cluster_autoscaler_policy" {
   name        = "${local.resource_name}-cluster-autoscaler-policy"
-  description = "Allow cluster autoscaler to scaler nodes"
+  description = "Allow cluster autoscaler to scale nodes"
 
   policy = jsonencode({
     Version = "2012-10-17"
