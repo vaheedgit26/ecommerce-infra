@@ -133,7 +133,7 @@ case "$ACTION" in
     # if [[ ! "$CONFIRM" =~ ^[Yy][Ee][Ss]$ ]]; then
 
     if [[ "$CONFIRM" != "yes" ]]; then
-      echo "❌ Destroy cancelled... Exiting"
+      print_info "❌ Destroy cancelled... Exiting"
       exit 1
     fi
 
