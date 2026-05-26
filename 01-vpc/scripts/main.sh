@@ -25,8 +25,8 @@ ACTION=$3
 
 # Setup paths FIRST ✅
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)" 
-ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
-S3_DIR="${ROOT_DIR}/00-s3"
+PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
+S3_DIR="${PARENT_DIR}/00-s3"
 
 # Ensure S3 dir exists
 if [[ ! -d "$S3_DIR" ]]; then
@@ -62,8 +62,8 @@ cat <<EOF
 EOF
 
 # Change to previous directory
-cd "$ROOT_DIR" || {
-  print_error "❌ Failed to change directory to: ${ROOT_DIR}"
+cd "$PARENT_DIR" || {
+  print_error "❌ Failed to change directory to: ${PARENT_DIR}"
   exit 1
 } 
 
