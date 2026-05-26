@@ -8,7 +8,7 @@ set -euo pipefail
 # Parameters validation
 if [[ $# -lt 3 ]]; then
   echo "Usage: bash vpc.sh <component: vpc|eks|..> <env: dev|qa|prod> <action: plan|apply|destroy> [ project bucket region ] optional"
-  echo "Example: bash vpc.sh vpc dev plan"
+  echo "Example: bash create-delete.sh vpc dev plan"
   exit 1
 fi
 
