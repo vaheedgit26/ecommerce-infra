@@ -24,7 +24,7 @@ ENV=$2
 ACTION=$3
 
 # Setup paths FIRST ✅
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)" 
+# SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)" 
 ROOT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
 S3_DIR="${ROOT_DIR}/00-s3"
 
