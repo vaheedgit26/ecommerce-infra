@@ -2,7 +2,8 @@
 set -euo pipefail
 
 # Load validation functions
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)/validate.sh"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+source "${SCRIPT_DIR}/validate.sh"
 
 # Parameters validation
 if [[ $# -lt 3 ]]; then 
