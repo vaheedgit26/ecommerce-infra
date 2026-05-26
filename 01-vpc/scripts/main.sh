@@ -115,13 +115,8 @@ case "$ACTION" in
   apply)
 
     if [[ ! -f "${PLAN_FILE}" ]]; then
-      print_error "❌ Plan file missing. Running plan first."
-      terraform plan \
-        -input=false \
-        -lock-timeout=5m \
-        -out="${PLAN_FILE}" \
-        "${TF_VARS[@]}"
-      # exit 1
+      print_error "❌ Plan file missing. Run plan first."
+      exit 1
     fi
     
     terraform apply -input=false -lock-timeout=5m "${PLAN_FILE}"
