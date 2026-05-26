@@ -23,8 +23,8 @@ BUCKET="${5:-}"     # set -u
 REGION="${6:-}"     # set -u
 
 if [[ "$COMPONENT" != "vpc" ]]; then
-	echo "Component should be 'vpc'(lower case) only for VPC creation"
-	exit 1
+  echo "Component should be 'vpc'(lower case) only for VPC creation"
+  exit 1
 fi
 
 case "$ENV" in
