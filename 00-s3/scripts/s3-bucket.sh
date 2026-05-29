@@ -21,7 +21,6 @@ print_info() {
   echo -e "$Y $1 $N"  
 }
 
-
 # Parameters validation
 if [[ $# -ne 4 ]]; then 
   print_error "Usage: bash s3-bucket.sh <project> <env> <region> <action>"
