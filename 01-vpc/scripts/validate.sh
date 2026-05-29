@@ -10,8 +10,7 @@ print_error() {
 }
 
 print_info() {
-  echo -e "$Y $1 $N"      # send the error to error terminal STDERR
-}
+  echo -e "$Y $1 $N"      
 
 validate() {
     
