@@ -63,13 +63,6 @@ EOF
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
-#S3_DIR="${PARENT_DIR}/00-s3"
-
-# Ensure S3 dir exists
-#if [[ ! -d "$S3_DIR" ]]; then
-#  print_error "❌ S3 bootstrap directory not found: ${S3_DIR}"
-#  exit 1
-#fi
 
 print_info "Changing to: $PARENT_DIR"
 
@@ -78,8 +71,6 @@ cd "$PARENT_DIR" || {
   print_error "❌ Failed to change directory to: ${PARENT_DIR}"
   exit 1
 } 
-
-# print_info "Creating State file Bucket: ${BUCKET}"
 
 echo "============================================="
 echo "Step 1: Terraform Init"
