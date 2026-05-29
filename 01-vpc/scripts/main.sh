@@ -61,7 +61,7 @@ cat <<EOF
      ACTION    : ${ACTION}
 EOF
 
-# Change to previous directory
+# Change to parent directory
 cd "$PARENT_DIR" || {
   print_error "❌ Failed to change directory to: ${PARENT_DIR}"
   exit 1
