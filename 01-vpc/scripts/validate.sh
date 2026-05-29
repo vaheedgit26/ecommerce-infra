@@ -10,7 +10,8 @@ print_error() {
 }
 
 print_info() {
-  echo -e "$Y $1 $N"      
+  echo -e "$Y $1 $N"  
+}
 
 validate() {
     
