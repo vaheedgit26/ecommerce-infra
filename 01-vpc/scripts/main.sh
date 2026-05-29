@@ -26,7 +26,7 @@ ACTION=$3
 # Setup paths FIRST ✅
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)" 
 PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
-S3_DIR="${PARENT_DIR}/00-s3"
+S3_DIR="${PARENT_DIR}/../00-s3"
 
 # Ensure S3 dir exists
 if [[ ! -d "$S3_DIR" ]]; then
