@@ -49,7 +49,7 @@ case "$ACTION" in
   *)
     print_error "❌ Invalid action: $ACTION"
     print_info  "Valid ACTIONS: plan|apply|destroy"
-    return 1
+    exit 1
     ;;
 esac
 
