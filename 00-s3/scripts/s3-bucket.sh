@@ -54,7 +54,7 @@ case "$ACTION" in
 esac
 
 cat <<EOF
-~_~S~D Details:
+📄 Details:
      PROJECT : ${PROJECT}
      ENV     : ${ENV}
      REGION  : ${REGION}
