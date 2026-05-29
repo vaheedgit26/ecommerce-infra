@@ -109,7 +109,7 @@ case "$ACTION" in
 
   destroy)
     # 🔥 Safety confirmation
-    read -p "⚠️ Are you sure you want to DELETE S3 bucket? Type 'yes' to continue: " CONFIRM
+    read -r -p "⚠️  Are you sure you want to DELETE S3 bucket? Type 'yes' to continue: " CONFIRM
 
     if [[ "$CONFIRM" != "yes" ]]; then
       print_info "❌ Destroy cancelled...Exiting"
