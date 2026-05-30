@@ -19,7 +19,7 @@ if [[ $# -lt 3 ]]; then
   print_info "Env: dev | qa | prod"
   print_info "Action: plan | apply | destroy"
   echo ""
-  print_info "Example: bash main.sh vpc dev plan"
+  print_info "Example: bash main.sh bastion dev plan"
   exit 1
 fi
 
