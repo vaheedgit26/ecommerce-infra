@@ -15,7 +15,7 @@ source "${SCRIPT_DIR}/validate.sh"
 # Parameters validation
 if [[ $# -lt 3 ]]; then 
   print_error "Usage: bash main.sh <component> <env> <action> [project bucket region]"
-  print_info "Component: vpc | bastion | eks | alb |...etc (lowercase only)"
+  print_info "Component: vpc | bastion | eks | alb | ... etc (lowercase only)"
   print_info "Env: dev | qa | prod"
   print_info "Action: plan | apply | destroy"
   echo ""
