@@ -3,9 +3,7 @@ set -euo pipefail
 ##################################################################################
 # Usage: bash main-bastion.sh  <component> <env> <action> [project bucket region]
 # Example:
-#   bash main.sh vpc dev plan 
-#   bash main.sh eks dev apply 
-#   bash main.sh alb dev destroy 
+#   bash main.sh bastion dev plan 
 ##################################################################################
 R="\e[31m"
 G="\e[32m"
