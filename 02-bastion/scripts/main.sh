@@ -74,6 +74,8 @@ cat <<EOF
      ACTION    : ${ACTION}
 EOF
 
+sleep 3
+
 print_info "Changing to: $PARENT_DIR"
 
 # Change to parent directory
