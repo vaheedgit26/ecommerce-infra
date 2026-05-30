@@ -7,6 +7,18 @@ set -euo pipefail
 #   bash main.sh eks dev apply 
 #   bash main.sh alb dev destroy 
 ##################################################################################
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+print_error() {
+  echo -e "$R $1 $N" >&2  # send the error to error terminal STDERR
+}
+
+print_info() {
+  echo -e "$Y $1 $N"  
+}
 
 # Load validation functions
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
@@ -34,9 +46,31 @@ print_info "Terraform version"
 terraform -version
 
 # Inputs
-COMPONENT=$1
-ENV=$2
-ACTION=$3
+COMPONENT="$1"
+ENV="$2"
+ACTION="$3"
+
+VALID_COMPONENT="bastion"
+VALID_ENVS=("dev" "qa" "prod")
+VALID_ACTIONS=("plan" "apply" "destroy")
+
+if ! validate_component "$COMPONENT" "$VALID_COMPONENT"; then
+  print_error "❌ Component validation failed"
+  print_error "Expected: '$VALID_COMPONENT' "
+  exit 1
+fi
+
+if ! validate_from_list "$ENV" "${VALID_ENVS[@]}"; then
+  print_error "❌ Env validation failed"
+  print_error "Expected one of: ${VALID_ENVS[*]}"           # prints as a single string (VALID_ACTIONS[@] as an array)
+  exit 1
+fi
+
+if ! validate_from_list "$ACTION" "${VALID_ACTIONS[@]}"; then
+  print_error "❌ Action validation failed"
+  print_error "Expected one of: ${VALID_ACTIONS[*]}"        # prints as a single string (VALID_ACTIONS[@] as an array)
+  exit 1
+fi
 
 PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
 S3_DIR="${PARENT_DIR}/../00-s3"
@@ -57,9 +91,18 @@ PROJECT="${4:-$(tf_output project)}"
 BUCKET="${5:-$(tf_output bucket_id)}"
 REGION="${6:-$(tf_output region)}"
 
-# Run validation AFTER values resolved ✅
-if ! validate "$COMPONENT" "$ENV" "$ACTION" "$PROJECT" "$BUCKET" "$REGION"; then
-  print_error "❌ Validation failed"
+if ! validate_item "$PROJECT"; then 
+  print_error "❌ PROJECT not provided and not found in Terraform output"
+  exit 1
+fi
+
+if ! validate_item "$BUCKET"; then
+  print_error "❌ BUCKET not provided and not found in Terraform output"
+  exit 1
+fi
+
+if ! validate_item "$REGION"; then
+  print_error "❌ REGION not provided and not found in Terraform output"
   exit 1
 fi
 
@@ -74,6 +117,7 @@ cat <<EOF
      ACTION    : ${ACTION}
 EOF
 
+print_info "Sleeping for 3 seconds"
 sleep 3
 
 print_info "Changing to: $PARENT_DIR"
