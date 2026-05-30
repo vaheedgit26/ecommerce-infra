@@ -24,8 +24,8 @@ validate() {
   local REGION=$6
   
   # Validate component
-  if [[ "$COMPONENT" != "vpc" ]]; then
-    print_error "Component should be 'vpc'(lower case) only for VPC creation"
+  if [[ "$COMPONENT" != "bastion" ]]; then
+    print_error "Component should be 'bastion'(lower case) only for VPC creation"
     return 1
   fi
 
