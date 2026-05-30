@@ -3,9 +3,9 @@ set -euo pipefail
 #####################################################################
 # Usage: bash main-bastion.sh  <component> <env> <action> [project bucket region]
 # Example:
-#   bash main-bastion.sh vpc dev plan 
-#   bash main-bastion.sh eks dev apply 
-#   bash main-bastion.sh alb dev destroy 
+#   bash main.sh vpc dev plan 
+#   bash main.sh eks dev apply 
+#   bash main.sh alb dev destroy 
 #####################################################################
 
 # Load validation functions
@@ -14,12 +14,12 @@ source "${SCRIPT_DIR}/validate.sh"
 
 # Parameters validation
 if [[ $# -lt 3 ]]; then 
-  print_error "Usage: bash main-bastion.sh <component> <env> <action> [project bucket region]"
+  print_error "Usage: bash main.sh <component> <env> <action> [project bucket region]"
   print_info "Component: vpc | bastion | eks | alb |...etc (lowercase only)"
   print_info "Env: dev | qa | prod"
   print_info "Action: plan | apply | destroy"
   echo ""
-  print_info "Example: bash main-bastion.sh vpc dev plan"
+  print_info "Example: bash main.sh vpc dev plan"
   exit 1
 fi
 
