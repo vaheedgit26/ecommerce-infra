@@ -25,7 +25,7 @@ source "${SCRIPT_DIR}/validate.sh"
 # Parameters validation
 if [[ $# -lt 3 ]]; then 
   print_error "Usage: bash main.sh <component> <env> <action> [project bucket region]"
-  print_info "Component: vpc | bastion | eks | alb | ... etc (lowercase only)"
+  print_info "Component: bastion (lowercase only)"
   print_info "Env: dev | qa | prod"
   print_info "Action: plan | apply | destroy"
   echo ""
@@ -54,19 +54,19 @@ VALID_ACTIONS=("plan" "apply" "destroy")
 
 if ! validate_component "$COMPONENT" "$VALID_COMPONENT"; then
   print_error "❌ Component validation failed"
-  print_error "Expected: '$VALID_COMPONENT' "
+  print_info  "Expected: '$VALID_COMPONENT' "
   exit 1
 fi
 
 if ! validate_from_list "$ENV" "${VALID_ENVS[@]}"; then
   print_error "❌ Env validation failed"
-  print_error "Expected one of: ${VALID_ENVS[*]}"           # prints as a single string (VALID_ACTIONS[@] as an array)
+  print_info  "Expected one of: ${VALID_ENVS[*]}"           # prints as a single string (VALID_ACTIONS[@] as an array)
   exit 1
 fi
 
 if ! validate_from_list "$ACTION" "${VALID_ACTIONS[@]}"; then
   print_error "❌ Action validation failed"
-  print_error "Expected one of: ${VALID_ACTIONS[*]}"        # prints as a single string (VALID_ACTIONS[@] as an array)
+  print_info  "Expected one of: ${VALID_ACTIONS[*]}"        # prints as a single string (VALID_ACTIONS[@] as an array)
   exit 1
 fi
 
