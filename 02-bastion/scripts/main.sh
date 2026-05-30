@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
-#####################################################################
+##################################################################################
 # Usage: bash main-bastion.sh  <component> <env> <action> [project bucket region]
 # Example:
 #   bash main.sh vpc dev plan 
 #   bash main.sh eks dev apply 
 #   bash main.sh alb dev destroy 
-#####################################################################
+##################################################################################
 
 # Load validation functions
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
