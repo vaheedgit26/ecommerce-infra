@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ##################################################################################
-# Usage: bash main-bastion.sh  <component> <env> <action> [project bucket region]
+# Usage: bash nat-instance.sh  <component> <env> <action> [project bucket region]
 # Example:
 #   bash main.sh nat-instance dev plan 
 ##################################################################################
