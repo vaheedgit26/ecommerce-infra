@@ -91,15 +91,17 @@ echo "============================================="
 echo "Step 3: ${ACTION}"
 echo "============================================="
 
+TF_VARS=(
+  -var="project=$PROJECT"
+  -var="env=$ENV"
+  -var="region=$REGION"
+)
+
 case "$ACTION" in
 
   plan)
-     terraform plan \
-      -var="project=$PROJECT" \
-      -var="env=$ENV" \
-      -var="region=$REGION" \
-      -out=${PLAN_FILE}
-    ;;
+     terraform plan "${TF_VARS[@]}" -out=${PLAN_FILE}
+     ;;
 
   apply)
     if [[ -f "${PLAN_FILE}" ]]; then
@@ -119,11 +121,7 @@ case "$ACTION" in
       exit 1
     fi
 
-    terraform destroy \
-      -var="project=$PROJECT" \
-      -var="env=$ENV" \
-      -var="region=$REGION" \
-      -auto-approve
+    terraform destroy "${TF_VARS[@]}" -auto-approve  
     ;;
 
   *)
