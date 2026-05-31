@@ -93,16 +93,19 @@ REGION="${6:-$(tf_output region)}"
 
 if ! validate_item "$PROJECT"; then 
   print_error "❌ PROJECT not provided and not found in Terraform output"
+  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
 if ! validate_item "$BUCKET"; then
   print_error "❌ BUCKET not provided and not found in Terraform output"
+  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
 if ! validate_item "$REGION"; then
   print_error "❌ REGION not provided and not found in Terraform output"
+  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
