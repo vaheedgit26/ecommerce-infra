@@ -56,7 +56,7 @@ VALID_ACTIONS=("plan" "apply" "destroy")
 
 if ! validate_component "$COMPONENT" "$VALID_COMPONENT"; then
   print_error "❌ Component validation failed"
-  print_info  "Expected: '$VALID_COMPONENT' "
+  print_info  "Expected: '$VALID_COMPONENT', Found: '$COMPONENT' "
   exit 1
 fi
 
