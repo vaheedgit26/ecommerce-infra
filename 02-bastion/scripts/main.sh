@@ -18,6 +18,8 @@ print_info() {
   echo -e "$Y $1 $N"  
 }
 
+VALID_COMPONENT="bastion"
+
 # Load validation functions
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 source "${SCRIPT_DIR}/validate.sh"
@@ -25,11 +27,11 @@ source "${SCRIPT_DIR}/validate.sh"
 # Parameters validation
 if [[ $# -lt 3 ]]; then 
   print_error "Usage: bash main.sh <component> <env> <action> [project bucket region]"
-  print_info "Component: bastion (lowercase only)"
+  print_info "Component: $VALID_COMPONENT (lowercase only)"
   print_info "Env: dev | qa | prod"
   print_info "Action: plan | apply | destroy"
   echo ""
-  print_info "Example: bash main.sh bastion dev plan"
+  print_info "Example: bash main.sh $VALID_COMPONENT dev plan"
   exit 1
 fi
 
@@ -48,7 +50,7 @@ COMPONENT="$1"
 ENV="$2"
 ACTION="$3"
 
-VALID_COMPONENT="bastion"
+# VALID_COMPONENT="bastion"
 VALID_ENVS=("dev" "qa" "prod")
 VALID_ACTIONS=("plan" "apply" "destroy")
 
@@ -105,6 +107,7 @@ if ! validate_item "$REGION"; then
 fi
 
 # Print values
+echo "------------------------------"
 cat <<EOF
 📄 Details:
      PROJECT   : ${PROJECT}
@@ -114,6 +117,7 @@ cat <<EOF
      COMPONENT : ${COMPONENT}
      ACTION    : ${ACTION}
 EOF
+echo "------------------------------"
 
 print_info "Sleeping for 3 seconds"
 sleep 3
@@ -126,7 +130,7 @@ cd "$PARENT_DIR" || {
   exit 1
 } 
 
-print_info "Using backend bucket: ${BUCKET}"
+print_info "Using backend state bucket: ${BUCKET}"
 print_info "State key: ${PROJECT}/${ENV}/${COMPONENT}/terraform.tfstate"
 
 echo "============================================="
