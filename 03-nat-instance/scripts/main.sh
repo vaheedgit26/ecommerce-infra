@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ##################################################################################
-# Usage: bash nat-instance.sh  <component> <env> <action> [project bucket region]
+# Usage: bash main.sh  <component> <env> <action> [project bucket region]
 # Example:
 #   bash main.sh nat-instance dev plan 
 ##################################################################################
@@ -93,19 +93,19 @@ REGION="${6:-$(tf_output region)}"
 
 if ! validate_item "$PROJECT"; then 
   print_error "❌ PROJECT not provided and not found in Terraform output"
-  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
+  print_info "Usage: bash main.sh <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
 if ! validate_item "$BUCKET"; then
   print_error "❌ BUCKET not provided and not found in Terraform output"
-  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
+  print_info "Usage: bash main.sh <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
 if ! validate_item "$REGION"; then
   print_error "❌ REGION not provided and not found in Terraform output"
-  print_info "bash nat-instance.sh  <component> <env> <action> [project bucket region]"
+  print_info "Usage: bash main.sh <component> <env> <action> [project bucket region]"
   exit 1
 fi
 
