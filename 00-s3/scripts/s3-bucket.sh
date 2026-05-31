@@ -53,6 +53,8 @@ case "$ACTION" in
     ;;
 esac
 
+# Print Details
+echo "----------------------------------------"
 cat <<EOF
 📄 Details:
      PROJECT : ${PROJECT}
@@ -60,6 +62,7 @@ cat <<EOF
      REGION  : ${REGION}
      ACTION  : ${ACTION}
 EOF
+echo "----------------------------------------"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd -P)" 
