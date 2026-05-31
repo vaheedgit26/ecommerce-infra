@@ -161,6 +161,7 @@ TF_VARS=(
   -var="project=$PROJECT"
   -var="env=$ENV"
   -var="region=$REGION"
+  -var="remote_state_s3_bucket=$BUCKET"
 )
 
 case "$ACTION" in
