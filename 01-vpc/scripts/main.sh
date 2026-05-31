@@ -107,6 +107,7 @@ if ! validate_item "$REGION"; then
 fi
 
 # Print values
+echo "----------------------------------------"
 cat <<EOF
 📄 Details:
      PROJECT   : ${PROJECT}
@@ -116,6 +117,7 @@ cat <<EOF
      COMPONENT : ${COMPONENT}
      ACTION    : ${ACTION}
 EOF
+echo "----------------------------------------"
 
 print_info "Sleeping for 3 seconds"
 sleep 3
