@@ -43,7 +43,7 @@ command -v terraform >/dev/null 2>&1 || {
 
 # Print Terraform version
 print_info "Terraform version"
-terraform -version
+terraform version
 
 # Inputs
 COMPONENT="$1"
