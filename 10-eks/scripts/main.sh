@@ -68,7 +68,7 @@ fi
 
 if ! validate_from_list "$ACTION" "${VALID_ACTIONS[@]}"; then
   print_error "❌ Action validation failed"
-  print_info  "Expected one of: ${VALID_ACTIONS[*]}"        # VALID_ENVS[*] prints as a single string (VALID_ACTIONS[@] prints as an array)
+  print_info  "Expected one of: ${VALID_ACTIONS[*]}"        # VALID_ACTIONS[*] prints as a single string (VALID_ACTIONS[@] prints as an array)
   exit 1
 fi
 
