@@ -27,7 +27,7 @@ validate_from_list() {
   return 1
 }
 
-# validate PROJECT, BUCKET and REGION
+# Validate PROJECT, BUCKET and REGION
 validate_item() {
   local ITEM="$1"
 
