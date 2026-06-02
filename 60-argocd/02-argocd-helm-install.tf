@@ -23,31 +23,32 @@ resource "helm_release" "argocd" {
   # replace         = true
   # force_update    = true
 
-  set {
-    name  = "server.service.type"
-    value = "ClusterIP"                # LoadBalancer # ClusterIP # NodePort
-  }
+  set = [
+    {
+      name  = "server.service.type"
+      value = "ClusterIP"                # LoadBalancer # ClusterIP # NodePort
+    },
 
-  set {
-    name  = "server.extraArgs[0]"
-    value = "--insecure"
-  }
+    {
+      name  = "server.extraArgs[0]"
+      value = "--insecure"
+    },
 
-  set {
-    name  = "rbac.create"
-    value = "true"
-  }
+    {
+      name  = "rbac.create"
+      value = "true"
+    },
 
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
+    {
+      name  = "installCRDs"
+      value = "true"
+    },
 
-  set {
-    name  = "crds.keep"
-    value = "false"
-  }
-
+    {
+      name  = "crds.keep"
+      value = "false"
+    }
+  ]
 }
 
 data "kubernetes_service_v1" "argocd_server" {
