@@ -12,6 +12,7 @@ validate_component() {
   return 0
 }
 
+# Validate from list
 validate_from_list() {
   local value="$1"
   shift                     # removes first argument
@@ -26,7 +27,7 @@ validate_from_list() {
   return 1
 }
 
-# validate PROJECT, BUCKET and REGION
+# Validate PROJECT, BUCKET and REGION
 validate_item() {
   local ITEM="$1"
 
