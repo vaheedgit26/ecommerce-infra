@@ -50,7 +50,7 @@ COMPONENT="$1"
 ENV="$2"
 ACTION="$3"
 
-# VALID_COMPONENT="nat-instance"
+# VALID_COMPONENT="argocd"
 VALID_ENVS=("dev" "qa" "prod")
 VALID_ACTIONS=("plan" "apply" "destroy")
 
