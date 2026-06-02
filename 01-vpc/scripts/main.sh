@@ -3,7 +3,7 @@ set -euo pipefail
 ##################################################################################
 # Usage: bash main.sh <component> <env> <action> [project bucket region]
 # Example:
-#   bash main.sh vpc dev plan 
+#   bash main.sh vpc dev plan  
 ##################################################################################
 R="\e[31m"
 G="\e[32m"
