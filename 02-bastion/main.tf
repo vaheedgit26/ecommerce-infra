@@ -10,7 +10,7 @@ module "bastion_sg" {
 }
 
 # Security Group Rule for Bastion Host
-resource "aws_security_group_rule" "bastion_22_internet" {
+resource "aws_security_group_rule" "bastion_ssh" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
@@ -20,7 +20,7 @@ resource "aws_security_group_rule" "bastion_22_internet" {
 }
 
 # Security Group Rule for Bastion Host (For Argocd access)
-resource "aws_security_group_rule" "bastion_8090_internet" {
+resource "aws_security_group_rule" "bastion_argocd" {
   type              = "ingress"
   from_port         = 8090
   to_port           = 8090
