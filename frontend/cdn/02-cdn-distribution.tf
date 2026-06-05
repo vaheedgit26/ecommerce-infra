@@ -130,7 +130,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 #   aliases = [var.domain_name]
 
   tags = {
-    Name = "ecommerce-cdn"
+    Name = "${var.project}-${var.env}-cdn"
   }
 }
 
