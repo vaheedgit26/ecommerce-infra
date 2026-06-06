@@ -4,7 +4,7 @@ resource "kubernetes_service_account" "app_sa" {
     namespace = var.namespace
 
     annotations = {
-      "eks.amazonaws.com/role-arn" = aws_iam_role.app_irsa_role.arn
+      "eks.amazonaws.com/role-arn" = aws_iam_role.app_pod_role.arn
     }
   }
 }
