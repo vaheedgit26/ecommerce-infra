@@ -5,6 +5,7 @@ data "aws_iam_policy_document" "eso_trust_policy" {
 
     condition {
       test     = "StringEquals"
+      # variable = trim(replace(local.eks_oidc_provider_url, "https://", ""), "/")  # Ensures no trailing slash
       variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:sub"
       values   = ["system:serviceaccount:kube-system:external-secrets"]
     }
