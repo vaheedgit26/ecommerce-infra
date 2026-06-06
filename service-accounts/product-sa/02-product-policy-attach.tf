@@ -14,7 +14,7 @@ resource "aws_iam_policy" "product_dynamodb_policy"" {
           "dynamodb:Scan",
           "dynamodb:UpdateItem"
         ]
-        Resource = "arn:aws:dynamodb:${var.region}:${local.aws_account_id}:table/${var.project}-${var.env}-products"
+        Resource = "arn:aws:dynamodb:${var.region}:${local.aws_account_id}:table/${var.dynamodb_table}"
       }
     ]
   })
