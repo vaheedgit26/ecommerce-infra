@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "product_trust_policy" {
 }
 
 resource "aws_iam_role" "product_role" {
-  name               = "${local.resource_name}-eso-role"
+  name               = "${local.resource_name}-product-role"
   assume_role_policy = data.aws_iam_policy_document.product_trust_policy.json
 
   tags = {
