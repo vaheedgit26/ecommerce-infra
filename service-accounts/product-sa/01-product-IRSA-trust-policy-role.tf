@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "product_trust_policy" {
       test     = "StringEquals"
       # variable = trim(replace(local.eks_oidc_provider_url, "https://", ""), "/")  # Ensures no trailing slash
       variable = "${replace(local.eks_oidc_provider_url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:ecommerce:product-sa"]
+      values   = ["system:serviceaccount:${var.namespace}:${var.service_account_name}"]
     }
 
     condition {
