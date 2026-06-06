@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "app_pod_trust_policy" {
   }
 }
 
-resource "aws_iam_role" "eso_role" {
+resource "aws_iam_role" "app_pod_role" {
   name               = "${local.resource_name}-app-pod-role"
   assume_role_policy = data.aws_iam_policy_document.eso_trust_policy.json
 
