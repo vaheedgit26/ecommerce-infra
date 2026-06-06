@@ -24,8 +24,8 @@ resource "aws_iam_policy" "app_pod_secrets_policy" {
           "ssm:GetParameters",
           "ssm:GetParametersByPath"
         ]
-        Resource = "arn:aws:ssm:*:${local.aws_account_id}:parameter:/${var.project}/${var.env}/*"
-        # Resource = "arn:aws:ssm:${var.region}:${local.aws_account_id}:parameter:/${var.project}/${var.env}/*"
+        Resource = "arn:aws:ssm:*:${local.aws_account_id}:parameter/${var.project}/${var.env}/*"
+        # Resource = "arn:aws:ssm:${var.region}:${local.aws_account_id}:parameter/${var.project}/${var.env}/*"
       }
     ]
   })
