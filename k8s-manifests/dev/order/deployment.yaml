@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  labels:
+    app.kubernetes.io/name: order
+    app.kubernetes.io/owner: ecommerce
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: order
+      app.kubernetes.io/owner: ecommerce
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: order
+        app.kubernetes.io/owner: ecommerce
+    spec:
+      serviceAccountName: order
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: order
+          image: "public.ecr.aws/aws-containers/retail-store-sample-catalog:1.3.0"
+          imagePullPolicy: Always  # IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8004
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: order
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8004
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8004
+          resources:
+            limits:
+              cpu: 256m
+              memory: 256Mi
+            requests:
+              cpu: 256m
+              memory: 256Mi
+        
