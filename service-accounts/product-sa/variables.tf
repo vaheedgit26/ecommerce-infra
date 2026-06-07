@@ -3,5 +3,5 @@ variable "env" {}
 variable "region" {}
 
 variable "namespace" {}
-variable "service_account" { default = "product-sa" }
+variable "service_account" { default = "product" }
 variable "dynamodb_table" { default = "ecommerce-products" }
