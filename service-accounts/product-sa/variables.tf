@@ -4,4 +4,4 @@ variable "region" {}
 
 variable "namespace" {}
 variable "service_account" { default = "product-sa" }
-variable "dynamodb_table" {}
+variable "dynamodb_table" { default = "ecommerce-products" }
