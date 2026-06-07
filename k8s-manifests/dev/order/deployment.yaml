@@ -35,6 +35,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: order
+            - secretRef:
+                name: ecommerce-dev-postgre-db-credentials
           securityContext:
             capabilities:
               drop:
