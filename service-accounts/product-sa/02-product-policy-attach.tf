@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "product_dynamodb_policy"" {
-  name = "${var.project}-${var.env}-dynamodb-access"
-  description = "Allow product pod to read ${var.dynamodb_table} dynamo db table"
+  name = "${local.resource_name}-dynamodb-access"
+  description = "Allow product pod to access ${var.dynamodb_table} dynamo db table"
 
   policy = jsonencode({
     Version = "2012-10-17"
