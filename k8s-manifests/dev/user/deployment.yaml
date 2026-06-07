@@ -35,6 +35,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: user
+            - secretRef:
+                name: ecommerce-dev-postgre-db-credentials
           securityContext:
             capabilities:
               drop:
