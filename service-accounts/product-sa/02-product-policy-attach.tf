@@ -20,7 +20,7 @@ resource "aws_iam_policy" "product_dynamodb_policy"" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "eso_secrets_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "product_policy_attachment" {
   role       = aws_iam_role.product_role.name
   policy_arn = aws_iam_policy.product_dynamodb_policy.arn
 }
