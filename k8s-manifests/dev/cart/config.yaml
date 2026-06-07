@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: cart
 data:
-  ENVIRONMENT: dev
-  AWS_REGION: us-east-1
+  ENVIRONMENT: "dev"
+  AWS_REGION: "us-east-1"
   DYNAMODB_ENDPOINT: ""
-  CARTS_TABLE: ecommerce-cart
+  CARTS_TABLE: "ecommerce-cart"
