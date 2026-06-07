@@ -9,4 +9,4 @@ data:
   DB_PORT: ""
   DB_NAME: ecommercedb
   DB_USER: postgres
-  DB_PASSWORD: 
+  DB_PASSWORD: ""
