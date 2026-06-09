@@ -5,4 +5,4 @@ metadata:
   # namespace: ecommerce-dev
 spec:
   type: ExternalName
-  externalName: <your-db.cluster-abcdefghijkl.ap-south-1.rds.amazonaws.com>
+  externalName: "<your-db.cluster-abcdefghijkl.ap-south-1.rds.amazonaws.com>"
