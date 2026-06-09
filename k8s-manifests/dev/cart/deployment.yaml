@@ -32,9 +32,11 @@ spec:
             - name: http
               containerPort: 8002
               protocol: TCP
+              
           envFrom:
             - configMapRef:
                 name: cart
+                
           securityContext:
             capabilities:
               drop:
@@ -42,14 +44,17 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
+          
           readinessProbe:
             httpGet:
               path: /health
               port: 8002
+              
           livenessProbe:
             httpGet:
               path: /health
               port: 8002
+              
           resources:
             limits:
               cpu: 256m
