@@ -4,7 +4,7 @@ metadata:
   name: ecommerce-internal
   annotations:
     # INTERNAL ALB
-    alb.ingress.kubernetes.io/scheme: internal               # internet-facing
+    alb.ingress.kubernetes.io/scheme: internal                     # internet-facing
 
     # Target pods directly
     alb.ingress.kubernetes.io/target-type: ip
@@ -13,7 +13,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 
     # Health check (applies to all target groups)
-    alb.ingress.kubernetes.io/healthcheck-path: /health     # common for all the microservices and best practice
+    alb.ingress.kubernetes.io/healthcheck-path: /health            # common for all the microservices and best practice
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
 
     # Optional tuning (recommended)
