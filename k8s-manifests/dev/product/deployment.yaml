@@ -32,9 +32,11 @@ spec:
             - name: http
               containerPort: 8001
               protocol: TCP
+
           envFrom:
             - configMapRef:
                 name: product
+                
           securityContext:
             capabilities:
               drop:
@@ -42,16 +44,28 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
+
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8001
+            periodSeconds: 5
+            failureThreshold: 12   # ~60s
+
           readinessProbe:
             httpGet:
               path: /health
               port: 8001
-            initialDelaySeconds: 5
-            periodSeconds: 10
-          liveness:
+            periodSeconds: 5
+            failureThreshold: 2
+
+          livenessProbe:
             httpGet:
               path: /health
               port: 8001
+            periodSeconds: 10
+            failureThreshold: 3
+
           resources:
             limits:
               cpu: 256m
