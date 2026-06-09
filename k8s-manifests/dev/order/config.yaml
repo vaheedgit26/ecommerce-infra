@@ -8,8 +8,8 @@ data:
   DB_HOST: "ecommerce-dev-rds-postgres"  # Externalname service
   DB_PORT: "5432"
   DB_NAME: "ecommercedb"
-  # DB_USER: "postgres"    # Create as secrets by eso operator
-  # DB_PASSWORD: ""        # Create as secrets by eso operator
+  # DB_USER: "postgres"                  # Create as secrets by eso operator
+  # DB_PASSWORD: ""                      # Create as secrets by eso operator
   PRODUCT_SERVICE_URL: "http://product-service:8001"
   CART_SERVICE_URL: "http://cart-service:8002" 
   USER_SERVICE_URL: "http://user-service:8003"
