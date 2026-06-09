@@ -13,7 +13,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
 
     # Health check (applies to all target groups)
-    alb.ingress.kubernetes.io/healthcheck-path: /health
+    alb.ingress.kubernetes.io/healthcheck-path: /health     # common for all the microservices and best practice
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
 
     # Optional tuning (recommended)
