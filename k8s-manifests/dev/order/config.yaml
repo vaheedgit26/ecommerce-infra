@@ -5,13 +5,13 @@ metadata:
 data:
   ENVIRONMENT: "dev"
   AWS_REGION: "us-east-1"
-  DB_HOST: "rds-postgres"
+  DB_HOST: "rds-postgres"  # Externalname service
   DB_PORT: "5432"
   DB_NAME: "ecommercedb"
-  # DB_USER: "postgres"
-  # DB_PASSWORD: ""
-  PRODUCT_SERVICE_URL: "product-service:8001"
-  CART_SERVICE_URL: "cart-service:8002" 
-  USER_SERVICE_URL: "user-service:8003"
+  # DB_USER: "postgres"    # Create as secrets by eso operator
+  # DB_PASSWORD: ""        # Create as secrets by eso operator
+  PRODUCT_SERVICE_URL: "http://product-service:8001"
+  CART_SERVICE_URL: "http://cart-service:8002" 
+  USER_SERVICE_URL: "http://user-service:8003"
   SNS_ENDPOINT: ""
   SNS_TOPIC_ARN: ""
