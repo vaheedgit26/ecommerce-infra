@@ -1,6 +1,6 @@
 # Use existing AWS Secrets Manager Secret (which is already created)
 data "aws_secretsmanager_secret" "ecommerce_secret" {
-  name = var.db_secret_name
+  name = var.aws_secret_name
 }
 
 data "aws_secretsmanager_secret_version" "ecommerce_secret_value" {
