@@ -64,7 +64,7 @@ spec:
               path: /health
               port: 8001
             periodSeconds: 10
-            failureThreshold: 3
+            failureThreshold: 3    # ~30s
 
           resources:
             limits:
