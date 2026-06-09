@@ -32,11 +32,13 @@ spec:
             - name: http
               containerPort: 8003
               protocol: TCP
+
           envFrom:
             - configMapRef:
                 name: user
             - secretRef:
                 name: ecommerce-dev-postgre-db-credentials
+
           securityContext:
             capabilities:
               drop:
@@ -44,14 +46,28 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
+
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8003
+            periodSeconds: 5
+            failureThreshold: 30   # ~150s
+
           readinessProbe:
             httpGet:
               path: /health
               port: 8003
+            periodSeconds: 5
+            failureThreshold: 6   # ~30s
+
           livenessProbe:
             httpGet:
               path: /health
               port: 8003
+            periodSeconds: 10
+            failureThreshold: 6   # ~60s
+
           resources:
             limits:
               cpu: 256m
