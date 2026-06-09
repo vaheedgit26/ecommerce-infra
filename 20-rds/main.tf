@@ -11,8 +11,8 @@ module "rds" {
   storage_type            = "gp2"
   storage_encrypted       = false   # true
   db_name                 = "ecommercedb"
-  username                = local.ecommerce_secret_json.db_username
-  password                = local.ecommerce_secret_json.db_password
+  username                = local.ecommerce_secret_json.username
+  password                = local.ecommerce_secret_json.password
   db_subnet_group_name    = local.db_subnet_group_name
   vpc_security_group_ids  = local.vpc_security_group_ids
 
