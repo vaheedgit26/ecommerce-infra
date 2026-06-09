@@ -46,6 +46,8 @@ spec:
             httpGet:
               path: /health
               port: 8001
+            initialDelaySeconds: 5
+            periodSeconds: 10
           liveness:
             httpGet:
               path: /health
