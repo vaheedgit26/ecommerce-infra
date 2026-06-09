@@ -50,21 +50,21 @@ spec:
               path: /health
               port: 8002
             periodSeconds: 3
-            failureThreshold: 10   # ~30s
+            failureThreshold: 10  # ~30s
           
           readinessProbe:
             httpGet:
               path: /health
               port: 8002
             periodSeconds: 5
-            failureThreshold: 5
+            failureThreshold: 6   # ~30s 
               
           livenessProbe:
             httpGet:
               path: /health
               port: 8002
             periodSeconds: 10
-            failureThreshold: 3
+            failureThreshold: 3   # ~30s
               
           resources:
             limits:
