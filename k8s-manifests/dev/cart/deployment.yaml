@@ -50,7 +50,7 @@ spec:
               path: /health
               port: 8002
             periodSeconds: 5
-            failureThreshold: 12  # ~30s
+            failureThreshold: 12  # ~60s
           
           readinessProbe:
             httpGet:
