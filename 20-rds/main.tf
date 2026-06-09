@@ -14,7 +14,7 @@ module "rds" {
   username                = local.ecommerce_secret_json.db_username
   password                = local.ecommerce_secret_json.db_password
   db_subnet_group_name    = local.db_subnet_group_name
-  vpc_security_group_ids  = [data.terraform_remote_state.eks.outputs.cluster_security_group_id, data.terraform_remote_state.bastion.outputs.bastion_sg_id]
+  vpc_security_group_ids  = local.vpc_security_group_ids
 
   common_tags = local.common_tags
 }
