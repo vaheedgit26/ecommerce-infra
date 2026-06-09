@@ -5,7 +5,7 @@ metadata:
 data:
   ENVIRONMENT: "dev"
   AWS_REGION: "us-east-1"
-  DB_HOST: "ecommerce-dev-rds-postgres"
+  DB_HOST: "ecommerce-dev-rds-postgres"   # Externalname service
   DB_PORT: "5432"
   DB_NAME: "ecommercedb"
   # DB_USER: "postgres"       # Created as secrets by eso operator
