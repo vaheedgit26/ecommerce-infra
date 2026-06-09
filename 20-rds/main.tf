@@ -3,7 +3,7 @@ module "rds" {
   database_subnet_ids = data.terraform_remote_state.vpc.outputs.database_subnet_ids       # For subnet group creation
 
   identifier              = local.identifier
-  availability_zone       = data.terraform_remote_state.vpc.outputs.availability_zones[0]         # var.availability_zone
+  availability_zone       = local.availability_zone        # var.availability_zone
   engine                  = "postgres"
   engine_version          = "15.7"
   instance_class          = "db.t3.micro"
