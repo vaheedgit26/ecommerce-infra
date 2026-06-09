@@ -27,7 +27,7 @@ spec:
       containers:
         - name: user
           image: "public.ecr.aws/aws-containers/retail-store-sample-catalog:1.3.0"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always      # IfNotPresent
           ports:
             - name: http
               containerPort: 8003
