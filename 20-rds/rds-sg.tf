@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "postgre_bastion" {
 }
 
 # EKS cluster  --->  postgre (database_subnet)
-resource "aws_security_group_rule" "mysql_backend" {
+resource "aws_security_group_rule" "postgre_backend" {
   type                     = "ingress"
   from_port                = 5432
   to_port                  = 5432
